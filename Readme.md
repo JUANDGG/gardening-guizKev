@@ -1,7 +1,7 @@
 # **Api Gardening GuizKev 👀**
 
 ## what does it consist of ? :
-El proyecto consiste en desarrollar un api dedicada a respaldar las operaciones de una empresa del sector de la jardinería. Este software abarcará varias áreas, incluyendo detalles de la oficina y los empleados, gestión de clientes, pedidos, productos y pagos
+The project is to develop a dedicated api to support the operations of a company in the gardening industry. This software will cover several areas, including office and employee details, customer management, orders, products and payments.
 
 ## Main objective
 The main objective of the project is to develop software dedicated to backing up the operations of a company in the gardening sector.
