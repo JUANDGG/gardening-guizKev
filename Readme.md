@@ -155,64 +155,96 @@ The project will utilize the following technologies:
 13. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
 
    ```sql
-   #Consulta aca
+   SELECT c.*
+   FROM cliente c
+   LEFT JOIN pedido pd ON c.codigo_cliente = pd.codigo_cliente
+   WHERE pd.codigo_cliente IS NULL;
 
    ```
 
 14. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
 
    ```sql
-   #Consulta aca
-
+   SELECT c.*
+   FROM cliente c
+   LEFT JOIN pago p ON c.codigo_cliente = p.codigo_cliente
+   LEFT JOIN pedido pd ON c.codigo_cliente = pd.codigo_cliente
+   WHERE p.codigo_cliente IS NULL AND pd.codigo_pedido IS NULL;   
    ```
 
 15. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
 
    ```sql
-   #Consulta aca
+   SELECT e.*
+   FROM empleado e
+   LEFT JOIN oficina o ON e.codigo_oficina = o.codigo_oficina
+   WHERE o.codigo_oficina IS NULL;
 
    ```
 
 16. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
 
    ```sql
-   #Consulta aca
+   SELECT e.*
+   FROM empleado e
+   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+   WHERE c.codigo_empleado_rep_ventas IS NULL;
 
    ```
 
 17. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
 
    ```sql
-   #Consulta aca
+   SELECT e.*, o.*
+   FROM empleado e
+   JOIN oficina o ON e.codigo_oficina = o.codigo_oficina
+   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+   WHERE c.codigo_empleado_rep_ventas IS NULL;
 
    ```
 
 18. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
 
    ```sql
-   #Consulta aca
+   SELECT e.*
+   FROM empleado e
+   LEFT JOIN oficina o ON e.codigo_oficina = o.codigo_oficina
+   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+   WHERE o.codigo_oficina IS NULL AND c.codigo_empleado_rep_ventas IS NULL;
 
    ```
 
 19. Devuelve un listado de los productos que nunca han aparecido en un pedido.
 
    ```sql
-   #Consulta aca
+   SELECT p.*
+   FROM producto p
+   LEFT JOIN detalle_pedido dp ON p.codigo_producto = dp.codigo_producto
+   WHERE dp.codigo_producto IS NULL;
 
    ```
 
 20. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
 
    ```sql
-   #Consulta aca
+   SELECT p.nombre, p.descripcion, p.imagen
+   FROM producto p
+   LEFT JOIN detalle_pedido dp ON p.codigo_producto = dp.codigo_producto
+   WHERE dp.codigo_producto IS NULL;
 
    ```
 
 21. Devuelve las oficinas donde **no trabajan** ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama `Frutales`.
 
    ```sql
-   #Consulta aca
-
+   SELECT DISTINCT o.*
+   FROM oficina o
+   LEFT JOIN empleado e ON o.codigo_oficina = e.codigo_oficina
+   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+   LEFT JOIN pedido pd ON c.codigo_cliente = pd.codigo_cliente
+   LEFT JOIN detalle_pedido dp ON pd.codigo_pedido = dp.codigo_pedido
+   LEFT JOIN producto p ON dp.codigo_producto = p.codigo_producto
+   WHERE p.gama = 'Frutales' AND e.codigo_empleado IS NULL;
    ```
 
 22. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
