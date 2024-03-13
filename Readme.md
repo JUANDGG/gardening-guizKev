@@ -427,7 +427,214 @@ The project will utilize the following technologies:
    1. ¿Cuántos empleados hay en la compañía?
 
    ```sql
-   #Codigo aca
+   SELECT COUNT(*) AS total_empleados
+   FROM empleado;
+
+   ```
+
+   2. ¿Cuántos clientes tiene cada país?
+
+   ```sql
+   SELECT pais, COUNT(*) AS total_clientes
+   FROM cliente
+   GROUP BY pais;
+
+   ```
+
+   3. ¿Cuál fue el pago medio en 2009?
+
+   ```sql
+   SELECT AVG(total) AS pago_promedio_2009
+   FROM pago
+   WHERE YEAR(fecha_pago) = 2009;
+
+   ```
+
+   4. ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos.
+
+   ```sql
+   SELECT estado, COUNT(*) AS total_pedidos
+   FROM pedido
+   GROUP BY estado
+   ORDER BY total_pedidos DESC;
+
+   ```
+
+   5. Calcula el precio de venta del producto más caro y más barato en una misma consulta.
+
+   ```sql
+   SELECT MAX(precio_venta) AS precio_mas_caro, MIN(precio_venta) AS precio_mas_barato
+   FROM producto;
+
+   ```
+
+   6. Calcula el número de clientes que tiene la empresa.
+
+   ```sql
+   SELECT COUNT(*) AS total_clientes
+   FROM cliente;
+
+   ```
+
+   7. ¿Cuántos clientes existen con domicilio en la ciudad de Madrid?
+
+   ```sql
+   SELECT COUNT(*) AS total_clientes_madrid
+   FROM cliente
+   WHERE ciudad = 'Madrid';
+
+   ```
+
+   8. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por `M`?
+
+   ```sql
+   SELECT ciudad, COUNT(*) AS total_clientes
+   FROM cliente
+   WHERE ciudad LIKE 'M%'
+   GROUP BY ciudad;
+
+   ```
+
+   9. Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno.
+
+   ```sql
+   SELECT e.nombre, e.apellido1, e.apellido2, COUNT(c.codigo_cliente) AS total_clientes_atendidos
+   FROM empleado e
+   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+   WHERE e.puesto = 'Representante de Ventas'
+   GROUP BY e.codigo_empleado;
+
+   ```
+
+   10. Calcula el número de clientes que no tiene asignado representante de ventas.
+
+   ```sql
+   SELECT COUNT(*) AS clientes_sin_representante
+   FROM cliente
+   WHERE codigo_empleado_rep_ventas IS NULL;
+
+   ```
+
+   11. Calcula la fecha del primer y último pago realizado por cada uno de los clientes. El listado deberá mostrar el nombre y los apellidos de cada cliente.
+
+   ```sql
+   SELECT c.nombre_cliente, c.nombre_contacto, c.apellido_contacto,
+       MIN(p.fecha_pago) AS primera_fecha_pago,
+       MAX(p.fecha_pago) AS ultima_fecha_pago
+   FROM cliente c
+   LEFT JOIN pago p ON c.codigo_cliente = p.codigo_cliente
+   GROUP BY c.codigo_cliente;
+
+   ```
+
+   12. Calcula el número de productos diferentes que hay en cada uno de los pedidos.
+
+   ```sql
+   SELECT codigo_pedido, COUNT(DISTINCT codigo_producto) AS num_productos_diferentes
+   FROM detalle_pedido
+   GROUP BY codigo_pedido;
+
+   ```
+
+   13. Calcula la suma de la cantidad total de todos los productos que aparecen en cada uno de los pedidos.
+
+   ```sql
+   SELECT codigo_pedido, SUM(cantidad) AS cantidad_total
+   FROM detalle_pedido
+   GROUP BY codigo_pedido;
+
+   ```
+
+   14. Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.
+
+   ```sql
+   SELECT p.codigo_producto, p.nombre, SUM(dp.cantidad) AS total_unidades_vendidas
+   FROM producto p
+   JOIN detalle_pedido dp ON p.codigo_producto = dp.codigo_producto
+   GROUP BY p.codigo_producto, p.nombre
+   ORDER BY total_unidades_vendidas DESC
+   LIMIT 20;
+
+   ```
+
+   15. La facturación que ha tenido la empresa en toda la historia, indicando la base imponible, el IVA y el total facturado. La base imponible se calcula sumando el coste del producto por el número de unidades vendidas de la tabla `detalle_pedido`. El IVA es el 21 % de la base imponible, y el total la suma de los dos campos anteriores.
+
+   ```sql
+   SELECT
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM
+      detalle_pedido dp
+   JOIN
+      producto p ON dp.codigo_producto = p.codigo_producto;
+
+   ```
+
+   16. La misma información que en la pregunta anterior, pero agrupada por código de producto.
+
+   ```sql
+   SELECT
+      p.codigo_producto,
+      p.nombre AS nombre_producto,
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM
+      detalle_pedido dp
+   JOIN
+      producto p ON dp.codigo_producto = p.codigo_producto
+   GROUP BY
+      p.codigo_producto, p.nombre;
+
+   ```
+
+   17. La misma información que en la pregunta anterior, pero agrupada por código de producto filtrada por los códigos que empiecen por `OR`.
+
+   ```sql
+   SELECT
+      p.codigo_producto,
+      p.nombre AS nombre_producto,
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM
+      detalle_pedido dp
+   JOIN
+      producto p ON dp.codigo_producto = p.codigo_producto
+   WHERE
+      p.codigo_producto LIKE 'OR%'
+   GROUP BY
+      p.codigo_producto, p.nombre;
+
+   ```
+
+   18. Lista las ventas totales de los productos que hayan facturado más de 3000 euros. Se mostrará el nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA).
+
+   ```sql
+   SELECT
+    p.nombre AS nombre_producto,
+    SUM(dp.cantidad) AS unidades_vendidas,
+    SUM(dp.cantidad * p.precio_venta) AS total_facturado,
+    SUM(dp.cantidad * p.precio_venta) * 0.21 AS total_facturado_con_iva
+   FROM
+      detalle_pedido dp
+   JOIN
+      producto p ON dp.codigo_producto = p.codigo_producto
+   GROUP BY
+      p.nombre
+   HAVING
+      total_facturado > 3000;
+
+   ```
+
+   19. Muestre la suma total de todos los pagos que se realizaron para cada uno de los años que aparecen en la tabla `pagos`.
+
+   ```sql
+   SELECT YEAR(fecha_pago) AS año, SUM(total) AS suma_total_pagos
+   FROM pago
+   GROUP BY YEAR(fecha_pago)
+   ORDER BY YEAR(fecha_pago);
 
    ```
 
