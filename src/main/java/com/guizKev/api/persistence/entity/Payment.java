@@ -34,6 +34,10 @@ public class Payment {
     @Column(name = "total", nullable = false, precision = 15, scale = 2)
     private BigDecimal total;
 
+
+  
+
+
     
     @Data
     @NoArgsConstructor

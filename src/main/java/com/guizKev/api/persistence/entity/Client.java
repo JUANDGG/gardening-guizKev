@@ -1,8 +1,15 @@
 package com.guizKev.api.persistence.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.* ;
 
@@ -51,7 +58,19 @@ public class Client {
     @Column(name = "codigo_empleado_rep_ventas", nullable = true,columnDefinition="INTEGER DEFAULT NULL")
     private Integer salesRepEmployeeCode;
 
-    //FALTA RELACION
     @Column(name = "limite_credito", nullable = true ,columnDefinition="NUMERIC(15,2) DEFAULT NULL")
     private Double creditLimit;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Payment> payment;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> order  ;
+
+    @ManyToOne
+    //posible falla
+    @JoinColumn(name = "codigo_empleado_rep_ventas")
+    private Employee employee ;
+
+
 }

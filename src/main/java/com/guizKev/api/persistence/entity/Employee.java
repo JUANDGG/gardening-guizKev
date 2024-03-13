@@ -1,10 +1,15 @@
 package com.guizKev.api.persistence.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 
@@ -40,6 +45,11 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "codigo_jefe")
     private Employee manager;
+
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Client> client;
+
 
     @Column(name = "puesto", columnDefinition = "VARCHAR(50)")
     private String position;

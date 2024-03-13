@@ -21,7 +21,6 @@ public class Product {
     
     @ManyToOne
     @JoinColumn(name = "gama")
-    @Column(nullable = false,columnDefinition = "VARCHAR(50)")
     private  ProductRange productRange ;
 
     @Column(name = "dimenciones  ",nullable = true,columnDefinition = "VARCHAR(25)")

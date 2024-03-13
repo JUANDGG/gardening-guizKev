@@ -1,8 +1,13 @@
 package com.guizKev.api.persistence.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 @Entity
@@ -32,4 +37,9 @@ public class Office {
 
     @Column(name = "linea_direccion2", columnDefinition = "VARCHAR(50)")
     private String addressLine2;
+
+
+    
+    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Employee> employee ;
 }

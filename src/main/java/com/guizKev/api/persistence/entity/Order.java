@@ -1,11 +1,14 @@
 package com.guizKev.api.persistence.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
@@ -32,8 +35,15 @@ public class Order {
     private String comments;
 
 
-    // FALTA RELACION 
+    
     @ManyToOne
     @JoinColumn(name = "codigo_cliente", nullable = false)
     private Client client;
+
+
+    @ManyToMany
+    @JoinTable(
+        name = "detalles_pedido"
+    )
+    private List<OrderDetail> orderDetail; 
 }
