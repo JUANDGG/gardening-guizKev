@@ -14,7 +14,7 @@ import lombok.*;
 
 
 @Entity
-@Getter @Setter @Builder 
+@Getter @Setter @NoArgsConstructor
 @Table(name = "gama_producto")
 public class ProductRange {
     @Id

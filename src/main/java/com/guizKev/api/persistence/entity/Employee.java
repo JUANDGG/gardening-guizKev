@@ -2,6 +2,8 @@ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,12 +19,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "empleado")
-@Getter @Setter @Builder 
+@Getter @Setter @NoArgsConstructor
 
 public class Employee {
      @Id
     @Column(name = "codigo_empleado", nullable = false, columnDefinition = "INTEGER")
-    private Integer employeeCode;
+    private int employeeCode;
 
     @Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(50)")
     private String firstName;
@@ -48,7 +50,7 @@ public class Employee {
     @JoinColumn(name = "codigo_jefe",referencedColumnName = "codigo_empleado")
     private Employee manager;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Client> client;
 
