@@ -18,7 +18,7 @@ import lombok.*;
 @Entity
 @Table(name = "empleado")
 @Getter @Setter @Builder 
-//falta corregir esto entidad
+
 public class Employee {
      @Id
     @Column(name = "codigo_empleado", nullable = false, columnDefinition = "INTEGER")
