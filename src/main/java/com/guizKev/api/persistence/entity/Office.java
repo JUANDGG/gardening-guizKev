@@ -8,9 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
+@Table(name = "oficina")
 @Getter @Setter @Builder
 public class Office {
     @Id

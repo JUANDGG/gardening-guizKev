@@ -10,11 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.*;
 
 
 
 @Entity
+@Table(name = "empleado")
 @Getter @Setter @Builder 
 //falta corregir esto entidad
 public class Employee {
@@ -43,7 +45,7 @@ public class Employee {
     private Office office;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_jefe")
+    @JoinColumn(name = "codigo_jefe",referencedColumnName = "codigo_empleado")
     private Employee manager;
 
 

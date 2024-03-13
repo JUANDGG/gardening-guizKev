@@ -1,25 +1,34 @@
 package com.guizKev.api.persistence.entity;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
+
+
 
 
 // FALTA ESTA ENTIDAD
 
 @Entity
-@Getter @Setter @Builder 
+@Getter @Setter @Builder
 @Table(name = "detalle_pedido")
 public class OrderDetail {
     @Id
-    @Column(name = "codigo_pedido",nullable = false,columnDefinition = "INTEGER")
-    private int orderCode;
+    @ManyToOne
+    @JoinColumn(name = "codigo_pedido")
+    private Order order ;
+    
 
-    //falta hacer pedido para relacionar esta 
-    @Column(name = "codigo_producto",nullable = false,columnDefinition = "VARCHAR(15)")
-    private String productCode;
+    @ManyToOne
+    @JoinColumn(name = "codigo_producto")
+    private Product product;
+
 
     @Column(name = "cantidad",nullable = false,columnDefinition = "INTEGER")
     private int  quantity ;

@@ -55,8 +55,6 @@ public class Client {
     @Column(name = "codigo_postal", nullable = true,columnDefinition="VARCHAR(10) DEFAULT NULL")
     private String postalCode;
 
-    @Column(name = "codigo_empleado_rep_ventas", nullable = true,columnDefinition="INTEGER DEFAULT NULL")
-    private Integer salesRepEmployeeCode;
 
     @Column(name = "limite_credito", nullable = true ,columnDefinition="NUMERIC(15,2) DEFAULT NULL")
     private Double creditLimit;
@@ -69,7 +67,7 @@ public class Client {
 
     @ManyToOne
     //posible falla
-    @JoinColumn(name = "codigo_empleado_rep_ventas")
+    @JoinColumn(name = "codigo_empleado_rep_ventas",referencedColumnName = "codigo_empleado")
     private Employee employee ;
 
 
