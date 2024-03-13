@@ -2,6 +2,8 @@ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,16 +18,19 @@ import lombok.*;
 
 
 @Entity
-@Getter @Setter @Builder
+@Getter @Setter @NoArgsConstructor
 @Table(name = "producto")
 public class Product {
     @Id
+    @JsonBackReference 
     @Column(name = "codigo_producto ",nullable = false,columnDefinition = "VARCHAR(15)")
     private  String productCode;
+    
     @Column(name = "nombre  ",nullable = false,columnDefinition = "VARCHAR(70)")
     private String  name ;
     
     @ManyToOne
+    @JsonBackReference 
     @JoinColumn(name = "gama")
     private  ProductRange productRange ;
 
@@ -49,7 +54,8 @@ public class Product {
 
     @Column(name = "precio_proveedor",nullable = true,columnDefinition = "NUMERIC(15,2) DEFAULT NULL")
     private double  supplierPrice ;
-
+    
+    @JsonBackReference 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetail;
 

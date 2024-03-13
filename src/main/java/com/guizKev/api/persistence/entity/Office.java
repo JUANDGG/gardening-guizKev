@@ -13,7 +13,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "oficina")
-@Getter @Setter @Builder
+@Getter @Setter @NoArgsConstructor
 public class Office {
     @Id
     @Column(name = "codigo_oficina", nullable = false, columnDefinition = "VARCHAR(10)")

@@ -3,6 +3,8 @@ package com.guizKev.api.persistence.entity;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,11 +18,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "pedido")
-@Getter @Setter @Builder
+@Getter @Setter @NoArgsConstructor
 public class Order {
      @Id
     @Column(name = "codigo_pedido", nullable = false,columnDefinition = "INTEGER")
-    private Integer orderCode;
+    private int orderCode;
 
     @Column(name = "fecha_pedido", nullable = false,columnDefinition = "DATE")
     private Date orderDate;
@@ -38,12 +40,12 @@ public class Order {
     private String comments;
 
 
-    
+    @JsonBackReference 
     @ManyToOne
     @JoinColumn(name = "codigo_cliente", nullable = false)
     private Client client;
 
-
+    @JsonBackReference 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetail; 
 }

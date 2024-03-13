@@ -2,6 +2,9 @@ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,12 +17,12 @@ import jakarta.persistence.Table;
 import lombok.* ;
 
 @Entity
-@Getter @Setter @Builder
+@Getter @Setter  @NoArgsConstructor
 @Table(name = "cliente")
 public class Client {
      @Id
     @Column(name = "codigo_cliente", nullable = false,columnDefinition = "INTEGER")
-    private Integer clientCode;
+    private int clientCode;
 
     @Column(name = "nombre_cliente", nullable = false,columnDefinition ="VARCHAR(50)")
     private String clientName;
@@ -59,14 +62,16 @@ public class Client {
     @Column(name = "limite_credito", nullable = true ,columnDefinition="NUMERIC(15,2) DEFAULT NULL")
     private Double creditLimit;
 
+    @JsonManagedReference 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Payment> payment;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> order  ;
+    @JsonManagedReference 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Order> order;
 
+    @JsonBackReference
     @ManyToOne
-    //posible falla
     @JoinColumn(name = "codigo_empleado_rep_ventas",referencedColumnName = "codigo_empleado")
     private Employee employee ;
 
