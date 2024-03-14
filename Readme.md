@@ -641,7 +641,8 @@ The project will utilize the following technologies:
 </details>
 
 ## Class Diagram
-not yet implemented !
+[Link Class Diagram](https://drive.google.com/file/d/1BhnQA5zl94FS9KlvVA2zUUOgZXkZM_Uv/view?usp=sharing)
+
 ![Class Diagram]() 
 
 ## Features
