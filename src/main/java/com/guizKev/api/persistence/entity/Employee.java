@@ -42,7 +42,7 @@ public class Employee {
     @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(100)")
     private String email;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "codigo_oficina", nullable = false)
     private Office office;
@@ -52,7 +52,7 @@ public class Employee {
     @JoinColumn(name = "codigo_jefe", referencedColumnName = "codigo_empleado")
     private Employee manager;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Client> client;
 
