@@ -2,6 +2,7 @@ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -15,14 +16,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
-
-
 @Entity
 @Table(name = "empleado")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 
 public class Employee {
-     @Id
+    @Id
     @Column(name = "codigo_empleado", nullable = false, columnDefinition = "INTEGER")
     private int employeeCode;
 
@@ -41,19 +42,19 @@ public class Employee {
     @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(100)")
     private String email;
 
-    
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "codigo_oficina", nullable = false)
     private Office office;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "codigo_jefe",referencedColumnName = "codigo_empleado")
+    @JoinColumn(name = "codigo_jefe", referencedColumnName = "codigo_empleado")
     private Employee manager;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Client> client;
-
 
     @Column(name = "puesto", columnDefinition = "VARCHAR(50)")
     private String position;

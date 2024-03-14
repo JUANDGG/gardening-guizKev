@@ -10,8 +10,6 @@ import com.guizKev.api.domain.service.order.OrderService;
 import com.guizKev.api.persistence.entity.Order;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("api/order")
@@ -23,5 +21,5 @@ public class OrderController {
     public List<Order> getAll() {
         return orderService.getAllOrder();
     }
-    
+
 }
