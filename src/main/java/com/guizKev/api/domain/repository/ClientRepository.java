@@ -10,93 +10,100 @@ import com.guizKev.api.persistence.entity.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client , Integer>{
 
-    //1 -Devuelve un listado con el nombre de los todos los clientes españoles.
-    @Query("SELECT c.clientName FROM Client c WHERE c.country = 'Spain'")
-    List<String> clientFromSpain();
+       // 1. Retrieves a list with the names of all Spanish clients.
+       @Query("SELECT c.clientName FROM Client c WHERE c.country = 'Spain'")
+       List<String> clientFromSpain();
+   
+       // 2. Retrieves a list with the client codes of those clients who made a payment in 2008. Removes duplicate client codes.
+       @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = 2008")
+       List<Integer> clientCodesWithPaymentsIn2008();
+   
+      // 3. Retrieves a list of all clients who are from the city of Madrid and whose sales representative has the employee code 11 or 30.
+        @Query("SELECT c.clientCode, c.clientName, c.city, c.employee.employeeCode FROM Client c WHERE c.city = 'Madrid' AND c.employee.employeeCode IN (11, 30)")
+        List<Object[]> clientsFromMadridWithSalesRepresentatives11Or30();
+   
+        /* 
+       // 4. Obtains a list with the name of each client and the name and last name of their sales  representative.
+       @Query("SELECT c.clientName, CONCAT(e.name, ' ', e.lastName) AS SalesRepresentative FROM Client c JOIN c.employee e")
+       List<Object[]> getClientsWithSalesRepresentatives();
 
-    //2  Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta:
-    @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = 2008")
-    List<Integer> clientCodesWithPaymentsIn2008();
-
-    //3 Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30.
-    @Query("SELECT c.clientCode, c.clientName, c.city, c.employee.employeeCode FROM Client c WHERE c.city = 'Madrid' AND c.employee.employeeCode IN (11, 30)")
-    List<Object[]> clientsFromMadridWithSalesRepresentatives11Or30();
-
-
-    ////// FALTA IMPLEMENTACION  :
-
-    // 1. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
-    @Query("SELECT c.nombreCliente, CONCAT(e.nombre, ' ', e.apellido1, ' ', e.apellido2) AS NombreRepresentanteVentas FROM Cliente c JOIN c.empleado e")
-    List<Object[]> obtenerClientesConRepresentantes();
-
-    // 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
-    @Query("SELECT c.codigoCliente, c.nombreCliente, e.nombre AS nombreRepresentanteVentas FROM Cliente c JOIN c.pagos p JOIN c.empleado e WHERE p.codigoCliente = c.codigoCliente")
-    List<Object[]> obtenerClientesConPagosYRepresentantes();
-
-    // 3. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas.
-    @Query("SELECT c.codigoCliente, c.nombreCliente, e.nombre AS nombreRepresentanteVentas FROM Cliente c LEFT JOIN c.pagos p JOIN c.empleado e WHERE p.codigoCliente IS NULL")
-    List<Object[]> obtenerClientesSinPagosYRepresentantes();
-
-    // 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
-    @Query("SELECT c.nombreCliente, e.nombre AS nombreRepresentante, o.ciudad AS ciudadRepresentante FROM Cliente c JOIN c.pagos p JOIN c.empleado e JOIN e.oficina o")
-    List<Object[]> obtenerClientesConPagosYCiudadRepresentante();
-
-    // 5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
-    @Query("SELECT c.nombreCliente, e.nombre AS nombreRepresentante, o.ciudad AS ciudadRepresentante FROM Cliente c LEFT JOIN c.pagos p JOIN c.empleado e JOIN e.oficina o WHERE p.codigoCliente IS NULL")
-    List<Object[]> obtenerClientesSinPagosYCiudadRepresentante();
-
-    // 6. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
-    @Query("SELECT c.nombreCliente, e.nombre AS nombreRepresentante, o.ciudad AS ciudadRepresentante FROM Cliente c JOIN c.empleado e JOIN e.oficina o")
-    List<Object[]> obtenerClientesConCiudadRepresentante();
-
-    // 7. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
-    @Query("SELECT DISTINCT c.nombreCliente FROM Cliente c JOIN c.pedidos p WHERE p.fechaEntrega IS NULL OR p.fechaEntrega > p.fechaEsperada")
-    List<String> obtenerClientesConPedidosFueraDeTiempo();
-
-    // 8. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
-    @Query("SELECT c.nombreCliente, GROUP_CONCAT(DISTINCT pr.gama ORDER BY pr.gama ASC) AS GamasCompradas FROM Cliente c JOIN c.pedidos p JOIN p.detallePedido dp JOIN dp.producto pr GROUP BY c.nombreCliente")
-    List<Object[]> obtenerGamasCompradasPorCliente();
-
-    // 9. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-    @Query("SELECT c FROM Cliente c LEFT JOIN c.pagos p WHERE p.codigoCliente IS NULL")
-    List<Client> obtenerClientesSinPagos();
-
-    // 10. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
-    @Query("SELECT c FROM Cliente c LEFT JOIN c.pedidos pd WHERE pd.codigoCliente IS NULL")
-    List<Client> obtenerClientesSinPedidos();
-
-    // 11. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido
-    @Query("SELECT c FROM Cliente c LEFT JOIN c.pagos p LEFT JOIN c.pedidos pd WHERE p.codigoCliente IS NULL AND pd.codigoPedido IS NULL")
-    List<Client> obtenerClientesSinPagosNiPedidos();
-
-    // 12. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
-    @Query("SELECT DISTINCT c FROM Cliente c JOIN c.pedidos pd LEFT JOIN c.pagos p WHERE p.codigoCliente IS NULL")
-    List<Client> obtenerClientesConPedidosSinPagos();
-
-    // 13. ¿Cuántos clientes tiene cada país?
-    @Query("SELECT c.pais, COUNT(c) FROM Cliente c GROUP BY c.pais")
-    List<Object[]> obtenerCantidadClientesPorPais();
-
-    // 14. Calcula el número de clientes que tiene la empresa.
-    @Query("SELECT COUNT(c) FROM Cliente c")
-    Long contarClientes();
-
-    // 15. ¿Cuántos clientes existen con domicilio en la ciudad de Madrid?
-    @Query("SELECT COUNT(c) FROM Cliente c WHERE c.ciudad = 'Madrid'")
-    Long contarClientesEnMadrid();
-
-    // 16. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por M?
-    @Query("SELECT c.ciudad, COUNT(c) FROM Cliente c WHERE c.ciudad LIKE 'M%' GROUP BY c.ciudad")
-    List<Object[]> obtenerCantidadClientesPorCiudadQueEmpiezanPorM();
-
-    // 17. Calcula el número de clientes que no tiene asignado representante de ventas.
-    @Query("SELECT COUNT(c) FROM Cliente c WHERE c.codigoEmpleadoRepVentas IS NULL")
-    Long contarClientesSinRepresentanteVentas();
-
-    // 18. Calcula la fecha del primer y último pago realizado por cada uno de los clientes. El listado deberá mostrar el nombre y los apellidos de cada cliente.
-    @Query("SELECT c.nombreCliente, c.nombreContacto, c.apellidoContacto, MIN(p.fechaPago) AS primeraFechaPago, MAX(p.fechaPago) AS ultimaFechaPago FROM Cliente c LEFT JOIN c.pagos p GROUP BY c.nombreCliente, c.nombreContacto, c.apellidoContacto")
-    List<Object[]> obtenerFechaPrimerUltimoPagoPorCliente();
+       */
 
 
+       /* 
+       // 5. Shows the names of clients who have made payments along with the name of their sales representatives.
+       @Query("SELECT c.clientCode, c.clientName, e.name AS SalesRepresentative FROM Client c JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode = c.clientCode")
+       List<Object[]> getClientsWithPaymentsAndSalesRepresentatives();
+   
+       // 6. Shows the names of clients who haven't made payments along with the name of their sales representatives.
+       @Query("SELECT c.clientCode, c.clientName, e.name AS SalesRepresentative FROM Client c LEFT JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode IS NULL")
+       List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives();
+   
+       // 7. Returns the names of clients who have made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
+       @Query("SELECT c.clientName, e.name AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c JOIN c.payment p JOIN c.employee e JOIN e.office o")
+       List<Object[]> getClientsWithPaymentsAndRepresentativeOfficeCity();
+   
+       // 8. Returns the names of clients who haven't made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
+       @Query("SELECT c.clientName, e.name AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c LEFT JOIN c.payment p JOIN c.employee e JOIN e.office o WHERE p.client.clientCode IS NULL")
+       List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity();
+
+       /* 
+       // 9. Returns the names of clients and the name of their sales representatives along with the city of the office to which the representative belongs.
+       @Query("SELECT c.clientName, e.firstName AS salesRepresentative, o.city AS representativeOfficeCity FROM Client c JOIN c.employee e JOIN e.office o")
+        List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity();
+        */
+
+        
+   
+       // 10. Returns the names of clients to whom orders haven't been delivered on time.
+       
+        /* @Query("SELECT DISTINCT c.clientName FROM Client c JOIN c.order o WHERE o.deliveryDate IS NULL OR o.deliveryDate > o.expectedDate")
+        List<String> getClientsWithLateOrders();*/
+        /* 
+       // 11. Returns a list of the different product ranges purchased by each client.
+       @Query("SELECT c.clientName, GROUP_CONCAT(DISTINCT pr.productRange ORDER BY pr.productRange ASC) AS PurchasedProductRanges FROM Client c JOIN c.order o JOIN o.orderDetails od JOIN od.product pr GROUP BY c.clientName")
+       List<Object[]> getPurchasedProductRangesByClient();
+    
+       // 12. Returns a list showing only clients who haven't made any payments.
+       @Query("SELECT c FROM Client c LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")
+       List<Client> getClientsWithoutPayments();
+   
+       // 13. Returns a list showing only clients who haven't placed any orders.
+       @Query("SELECT c FROM Client c LEFT JOIN c.order o WHERE o.client.clientCode IS NULL")
+       List<Client> getClientsWithoutOrders();
+   
+       // 14. Returns a list showing clients who haven't made any payments and clients who haven't placed any orders.
+       @Query("SELECT c FROM Client c LEFT JOIN c.payment p LEFT JOIN c.order o WHERE p.client.clientCode IS NULL AND o.client.clientCode IS NULL")
+       List<Client> getClientsWithoutPaymentsAndOrders();
+   
+       // 15. Returns a list showing clients who have placed orders but haven't made any payments.
+       @Query("SELECT DISTINCT c FROM Client c JOIN c.order o LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")
+       List<Client> getClientsWithOrdersWithoutPayments();
+   
+       // 16. Returns the count of clients for each country.
+       @Query("SELECT c.country, COUNT(c) FROM Client c GROUP BY c.country")
+       List<Object[]> getClientCountByCountry();
+   
+       // 17. Calculates the total number of clients in the company.
+       @Query("SELECT COUNT(c) FROM Client c")
+       Long getClientCount();
+   
+       // 18. Returns the count of clients with an address in the city of Madrid.
+       @Query("SELECT COUNT(c) FROM Client c WHERE c.city = 'Madrid'")
+       Long getClientCountInMadrid();
+   
+       // 19. Calculates the count of clients in each city starting with the letter 'M'.
+       @Query("SELECT c.city, COUNT(c) FROM Client c WHERE c.city LIKE 'M%' GROUP BY c.city")
+       List<Object[]> getClientCountByCityStartingWithM();
+   
+       // 20. Calculates the number of clients without a sales representative assigned.
+       @Query("SELECT COUNT(c) FROM Client c WHERE c.employee IS NULL")
+       Long getClientCountWithoutSalesRepresentative();
+   
+       // 21. Calculates the date of the first and last payment made by each client. The list will show the name and last name of each client.
+       @Query("SELECT c.clientName, MIN(p.paymentDate) AS firstPaymentDate, MAX(p.paymentDate) AS lastPaymentDate FROM Client c JOIN c.payment p GROUP BY c.clientName")
+       List<Object[]> getFirstAndLastPaymentDatesByClient();
+
+    */
     
 } 

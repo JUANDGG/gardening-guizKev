@@ -3,7 +3,7 @@ package com.guizKev.api.persistence.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -47,12 +47,12 @@ public class Employee {
     @JoinColumn(name = "codigo_oficina", nullable = false)
     private Office office;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "codigo_jefe", referencedColumnName = "codigo_empleado")
     private Employee manager;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Client> client;
 
