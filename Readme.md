@@ -642,6 +642,16 @@ The project will utilize the following technologies:
 
 ## Class Diagram
 [Link Class Diagram](https://drive.google.com/file/d/1BhnQA5zl94FS9KlvVA2zUUOgZXkZM_Uv/view?usp=sharing)
+
+![Class Diagram]()
+
+## Folder organization
+![Folder Organization](/imagesDocumentation/FolderOrganitation.png)
+
+# Entity
+![Folder Entity](/imagesDocumentation/Entity.png)
+
+=======
 ![Class Diagram]() 
 
 ## Features
