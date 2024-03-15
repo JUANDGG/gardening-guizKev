@@ -10,9 +10,6 @@ import com.guizKev.api.persistence.entity.Client;
 
 import lombok.*;
 
-
-
-
 @Service
 @Getter @Setter 
 public class ClientServiceImpl implements ClientService {
@@ -40,15 +37,12 @@ public class ClientServiceImpl implements ClientService {
     public List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30() {
         return clientRepository.clientsFromMadridWithSalesRepresentatives11Or30();
     }
-    /* 
+    
     @Override
     public List<Object[]> getClientsWithSalesRepresentatives() {
         return clientRepository.getClientsWithSalesRepresentatives();
     }
 
-    */
-
-    /*
 
     @Override
     public List<Object[]> getClientsWithPaymentsAndSalesRepresentatives() {
@@ -70,27 +64,28 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     }
 
-    @Override
-    public List<String> getClientsWithLateOrders() {
-        return clientRepository.getClientsWithLateOrders();
-    }
 
-    /* 
+     
     @Override
     public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
         return clientRepository.getClientsAndSalesRepresentativesWithOfficeCity();
     }
-    
+     
 
     @Override
     public List<String> getClientsWithLateOrders() {
         return clientRepository.getClientsWithLateOrders();
     }
+    
 
+    /* 
     @Override
     public List<Object[]> getPurchasedProductRangesByClient() {
         return clientRepository.getPurchasedProductRangesByClient();
     }
+
+    */
+
 
     @Override
     public List<Client> getClientsWithoutPayments() {
@@ -141,5 +136,5 @@ public class ClientServiceImpl implements ClientService {
     public List<Object[]> getFirstAndLastPaymentDatesByClient() {
         return clientRepository.getFirstAndLastPaymentDatesByClient();
     }
-    */
+    
 }

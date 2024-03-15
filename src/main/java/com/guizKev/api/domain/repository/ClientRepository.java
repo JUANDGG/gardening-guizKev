@@ -14,55 +14,48 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
        @Query("SELECT c.clientName FROM Client c WHERE c.country = 'Spain'")
        List<String> clientFromSpain();
    
-       // 2. Retrieves a list with the client codes of those clients who made a payment in 2008. Removes duplicate client codes.
-       @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = 2008")
-       List<Integer> clientCodesWithPaymentsIn2008();
+     // 2. Retrieves a list with the client codes of those clients who made a payment in 2008. Removes duplicate client codes.
+      @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = 2008 GROUP BY c.clientCode")
+      List<Integer> clientCodesWithPaymentsIn2008();
    
       // 3. Retrieves a list of all clients who are from the city of Madrid and whose sales representative has the employee code 11 or 30.
         @Query("SELECT c.clientCode, c.clientName, c.city, c.employee.employeeCode FROM Client c WHERE c.city = 'Madrid' AND c.employee.employeeCode IN (11, 30)")
         List<Object[]> clientsFromMadridWithSalesRepresentatives11Or30();
    
-        /* 
-       // 4. Obtains a list with the name of each client and the name and last name of their sales  representative.
-       @Query("SELECT c.clientName, CONCAT(e.name, ' ', e.lastName) AS SalesRepresentative FROM Client c JOIN c.employee e")
-       List<Object[]> getClientsWithSalesRepresentatives();
-
-       */
-
-
-       /* 
-       // 5. Shows the names of clients who have made payments along with the name of their sales representatives.
-       @Query("SELECT c.clientCode, c.clientName, e.name AS SalesRepresentative FROM Client c JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode = c.clientCode")
-       List<Object[]> getClientsWithPaymentsAndSalesRepresentatives();
-   
-       // 6. Shows the names of clients who haven't made payments along with the name of their sales representatives.
-       @Query("SELECT c.clientCode, c.clientName, e.name AS SalesRepresentative FROM Client c LEFT JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode IS NULL")
-       List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives();
-   
-       // 7. Returns the names of clients who have made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
-       @Query("SELECT c.clientName, e.name AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c JOIN c.payment p JOIN c.employee e JOIN e.office o")
-       List<Object[]> getClientsWithPaymentsAndRepresentativeOfficeCity();
-   
-       // 8. Returns the names of clients who haven't made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
-       @Query("SELECT c.clientName, e.name AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c LEFT JOIN c.payment p JOIN c.employee e JOIN e.office o WHERE p.client.clientCode IS NULL")
-       List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity();
-
-       /* 
-       // 9. Returns the names of clients and the name of their sales representatives along with the city of the office to which the representative belongs.
-       @Query("SELECT c.clientName, e.firstName AS salesRepresentative, o.city AS representativeOfficeCity FROM Client c JOIN c.employee e JOIN e.office o")
-        List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity();
-        */
-
         
-   
-       // 10. Returns the names of clients to whom orders haven't been delivered on time.
-       
-        /* @Query("SELECT DISTINCT c.clientName FROM Client c JOIN c.order o WHERE o.deliveryDate IS NULL OR o.deliveryDate > o.expectedDate")
-        List<String> getClientsWithLateOrders();*/
+       // 4. Obtains a list with the name of each client and the name and last name of their sales representative.
+        @Query("SELECT c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative FROM Client c JOIN c.employee e GROUP BY c.clientName, e.firstName, e.lastName1")
+        List<Object[]> getClientsWithSalesRepresentatives();
+              
+        // 5. Shows the names of clients who have made payments along with the name of their sales representatives.
+        @Query("SELECT c.clientCode, c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative FROM Client c JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode = c.clientCode GROUP BY c.clientCode, c.clientName, e.firstName, e.lastName1")
+        List<Object[]> getClientsWithPaymentsAndSalesRepresentatives();
+
+        // 6. Shows the names of clients who haven't made payments along with the name of their sales representatives.
+        @Query("SELECT c.clientCode, c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative FROM Client c LEFT JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode IS NULL GROUP BY c.clientCode, c.clientName, e.firstName, e.lastName1")
+        List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives();
+
+        // 7. Returns the names of clients who have made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
+        @Query("SELECT c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c JOIN c.payment p JOIN c.employee e JOIN e.office o GROUP BY c.clientName, e.firstName, e.lastName1, o.city")
+        List<Object[]> getClientsWithPaymentsAndRepresentativeOfficeCity();
+
+        // 8. Returns the names of clients who haven't made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
+        @Query("SELECT c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative, o.city AS RepresentativeOfficeCity FROM Client c LEFT JOIN c.payment p JOIN c.employee e JOIN e.office o WHERE p.client.clientCode IS NULL GROUP BY c.clientName, e.firstName, e.lastName1, o.city")
+        List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity();
+
+        // 9. Returns the names of clients and the name of their sales representatives along with the city of the office to which the representative belongs.
+        @Query("SELECT c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS salesRepresentative, o.city AS representativeOfficeCity FROM Client c JOIN c.employee e JOIN e.office o GROUP BY c.clientName, e.firstName, e.lastName1, o.city")
+        List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity();
+
+        //10. Returns the names of clients to whom orders haven't been delivered on time.
+        @Query("SELECT DISTINCT c.clientName FROM Client c JOIN c.order o WHERE o.deliveryDate IS NULL OR o.deliveryDate > o.expectedDate GROUP BY c.clientName")
+        List<String> getClientsWithLateOrders();
+              
         /* 
        // 11. Returns a list of the different product ranges purchased by each client.
        @Query("SELECT c.clientName, GROUP_CONCAT(DISTINCT pr.productRange ORDER BY pr.productRange ASC) AS PurchasedProductRanges FROM Client c JOIN c.order o JOIN o.orderDetails od JOIN od.product pr GROUP BY c.clientName")
        List<Object[]> getPurchasedProductRangesByClient();
+       */
     
        // 12. Returns a list showing only clients who haven't made any payments.
        @Query("SELECT c FROM Client c LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")
@@ -79,7 +72,9 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
        // 15. Returns a list showing clients who have placed orders but haven't made any payments.
        @Query("SELECT DISTINCT c FROM Client c JOIN c.order o LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")
        List<Client> getClientsWithOrdersWithoutPayments();
-   
+      
+
+       
        // 16. Returns the count of clients for each country.
        @Query("SELECT c.country, COUNT(c) FROM Client c GROUP BY c.country")
        List<Object[]> getClientCountByCountry();
@@ -104,6 +99,6 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
        @Query("SELECT c.clientName, MIN(p.paymentDate) AS firstPaymentDate, MAX(p.paymentDate) AS lastPaymentDate FROM Client c JOIN c.payment p GROUP BY c.clientName")
        List<Object[]> getFirstAndLastPaymentDatesByClient();
 
-    */
+    
     
 } 
