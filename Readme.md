@@ -651,6 +651,8 @@ The project will utilize the following technologies:
 # Entity
 ![Folder Entity](/imagesDocumentation/Entity.png)
 
+=======
+![Class Diagram]() 
 
 ## Features
 The software will include the following features:
