@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -39,15 +39,12 @@ public class ClientController {
     public List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30() {
         return clientService.getClientsFromMadridWithSalesRepresentatives11Or30();
     }
-    /* 
+    
     @GetMapping("/sales-representatives")
     public List<Object[]> getClientsWithSalesRepresentatives() {
         return clientService.getClientsWithSalesRepresentatives();
     }
 
-    */
-
-    /* 
 
     @GetMapping("/payments-representatives")
     public List<Object[]> getClientsWithPaymentsAndSalesRepresentatives() {
@@ -69,22 +66,26 @@ public class ClientController {
         return clientService.getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     }
 
-    /* 
+    
     
     @GetMapping("/clients-sales-representatives-office-city")
     public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
         return clientService.getClientsAndSalesRepresentativesWithOfficeCity();
     }
+    
 
     @GetMapping("/late-orders")
     public List<String> getClientsWithLateOrders() {
         return clientService.getClientsWithLateOrders();
     }
 
+     /* 
     @GetMapping("/purchased-product-ranges")
     public List<Object[]> getPurchasedProductRangesByClient() {
         return clientService.getPurchasedProductRangesByClient();
     }
+
+    */
 
     @GetMapping("/no-payments")
     public List<Client> getClientsWithoutPayments() {
@@ -138,5 +139,5 @@ public class ClientController {
    
     
     
-    */
+    
 }

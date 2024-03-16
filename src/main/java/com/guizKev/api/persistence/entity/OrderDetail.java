@@ -3,6 +3,7 @@ package com.guizKev.api.persistence.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,13 +27,13 @@ import lombok.*;
 public class OrderDetail {
     @Id
     @ManyToOne
-    @JsonBackReference 
+    @JsonManagedReference
     @JoinColumn(name = "codigo_pedido")
     private Order order ;
     
     @Id
     @ManyToOne
-    @JsonBackReference 
+    @JsonManagedReference
     @JoinColumn(name = "codigo_producto")
     private Product product;
 
