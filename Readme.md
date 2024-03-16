@@ -218,6 +218,19 @@ The project will utilize the following technologies:
 
    ```
 
+   21. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+
+   ```sql
+   SELECT
+   c.nombre_cliente AS NombreCliente,
+   e.nombre AS NombreRepresentante,
+   o.ciudad AS CiudadRepresentante
+   FROM cliente AS c
+   JOIN empleado AS e ON c.codigo_empleado_rep_ventas = e.codigo_empleado
+   JOIN oficina AS o ON e.codigo_oficina = o.codigo_oficina;
+
+   ```
+
 </details>
 
 <details>
@@ -515,6 +528,64 @@ The project will utilize the following technologies:
    SELECT codigo_pedido, SUM(cantidad) AS cantidad_total
    FROM detalle_pedido
    GROUP BY codigo_pedido;
+
+   ```
+
+   3. La facturación que ha tenido la empresa en toda la historia, indicando la base imponible, el IVA y el total facturado. La base imponible se calcula sumando el coste del producto por el número de unidades vendidas de la tabla `detalle_pedido`. El IVA es el 21 % de la base imponible, y el total la suma de los dos campos anteriores.
+
+   ```sql
+   SELECT
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM detalle_pedido dp
+   JOIN producto p ON dp.codigo_producto = p.codigo_producto;
+
+   ```
+
+   4. La misma información que en la pregunta anterior, pero agrupada por código de producto.
+
+   ```sql
+   SELECT
+      p.codigo_producto,
+      p.nombre AS nombre_producto,
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM detalle_pedido dp
+   JOIN producto p ON dp.codigo_producto = p.codigo_producto
+   GROUP BY p.codigo_producto, p.nombre;
+
+   ```
+
+   5. La misma información que en la pregunta anterior, pero agrupada por código de producto filtrada por los códigos que empiecen por `OR`.
+
+   ```sql
+   SELECT
+      p.codigo_producto,
+      p.nombre AS nombre_producto,
+      SUM(dp.cantidad * p.precio_venta) AS base_imponible,
+      SUM(dp.cantidad * p.precio_venta) * 0.21 AS iva,
+      SUM(dp.cantidad * p.precio_venta) + (SUM(dp.cantidad * p.precio_venta) * 0.21) AS total_facturado
+   FROM detalle_pedido dp
+   JOIN producto p ON dp.codigo_producto = p.codigo_producto
+   WHERE p.codigo_producto LIKE 'OR%'
+   GROUP BY p.codigo_producto, p.nombre;
+
+   ```
+
+   6. Lista las ventas totales de los productos que hayan facturado más de 3000 euros. Se mostrará el nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA).
+
+   ```sql
+   SELECT
+    p.nombre AS nombre_producto,
+    SUM(dp.cantidad) AS unidades_vendidas,
+    SUM(dp.cantidad * p.precio_venta) AS total_facturado,
+    SUM(dp.cantidad * p.precio_venta) * 0.21 AS total_facturado_con_iva
+   FROM detalle_pedido dp
+   JOIN producto p ON dp.codigo_producto = p.codigo_producto
+   GROUP BY p.nombre
+   HAVING total_facturado > 3000;
 
    ```
 
