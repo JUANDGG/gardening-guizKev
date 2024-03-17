@@ -23,5 +23,75 @@ public class EmployeeController {
         return employeeService.getAllEmployee();
     }
 
+    //Perfect 
+    @GetMapping("/1")
+    public List<Employee> getEmployeesByManagerCode(){
+        return employeeService.getEmployeesByManagerCode();
+    }
+
+    // @GetMapping("/2")
+    // public List<Object[]> getCEO() {
+    //     return employeeService.getCEO();
+    // }
+
+    //
+    // @GetMapping("/3")
+    // public List<Object[]> getNonSalesRepresentatives(){
+    //     return employeeService.getNonSalesRepresentatives();
+    // }
+
+    // 
+    // @GetMapping("/4")
+    // public List<Object[]> getEmployeesWithManagers(){
+    //     return employeeService.getEmployeesWithManagers();
+    // }
+
+    // @GetMapping("/5")
+    // public List<Object[]> getEmployeeManagerAndGrandManagerNames(){
+    //     return employeeService.getEmployeeManagerAndGrandManagerNames();
+    // }    
+    
+    //Perfect
+    @GetMapping("/6")
+    public List<Employee> getEmployeesWithoutOffice(){
+        return employeeService.getEmployeesWithoutOffice();
+    }
+
+    //It doesn´t work, but it doesn´t return error
+    @GetMapping("/7")
+    public List<Employee> getEmployeesWithoutClients(){
+        return employeeService.getEmployeesWithoutClients();
+    }
+    
+    //It works, but return nuts data
+    @GetMapping("/8")
+    public List<Object[]> getEmployeesWithoutClientsWithOffice(){
+        return employeeService.getEmployeesWithoutClientsWithOffice();
+    }
+
+    //It doesn´t work, but it doesn´t return error
+    @GetMapping("/9")
+    public List<Employee> getEmployeesWithoutOfficeOrClient(){
+        return employeeService.getEmployeesWithoutOfficeOrClient();
+    }
+
+    //It doesn´t work, but it doesn´t return error
+    @GetMapping("/10")
+    public List<Object[]> getEmployeesWithoutClientsAndManager(){
+        return employeeService.getEmployeesWithoutClientsAndManager();
+    }
+    
+    //Perfect
+    @GetMapping("/11")
+    public Long countEmployees(){
+        return employeeService.countEmployees();
+    }
+    
+    //
+    // @GetMapping("/12")
+    // public List<Object[]> getSalesRepresentativesAndClientCount(){
+    //     return employeeService.getSalesRepresentativesAndClientCount();
+    // }
+    
 
 }
