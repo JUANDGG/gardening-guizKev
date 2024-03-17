@@ -21,7 +21,73 @@ public class EmployeeController {
     @GetMapping("/all")
     public List<Employee> getAllEmployee (){
         return employeeService.getAllEmployee();
+    }   
+
+
+    @GetMapping("/managers")
+    public List<Object[]> findEmployeesByManagerCode() {
+        return employeeService.findEmployeesByManagerCode();
     }
+    // esta mal
+    @GetMapping("/company/manager")
+    public Object findCompanyManager() {
+        return employeeService.findCompanyManager();
+    }
+
+    @GetMapping("/non-sales-representatives")
+    public List<Object[]> findNonSalesRepresentatives() {
+        return employeeService.findNonSalesRepresentatives();
+    }
+
+    @GetMapping("/with-managers")
+    public List<Object[]> findEmployeesWithManagers() {
+        return employeeService.findEmployeesWithManagers();
+    }
+
+    @GetMapping("/with-managers-and-manager-of-managers")
+    public List<Object[]> findEmployeesWithManagersAndManagerOfManagers() {
+        return employeeService.findEmployeesWithManagersAndManagerOfManagers();
+    }
+
+    @GetMapping("/without-office")
+    public List<Employee> findEmployeesWithoutOffice() {
+        return employeeService.findEmployeesWithoutOffice();
+    }
+
+    @GetMapping("/without-client")
+    public List<Object[]> findEmployeesWithoutClient() {
+        return employeeService.findEmployeesWithoutClient();
+    }
+
+    @GetMapping("/without-client-and-office")
+    public List<Object[]> findEmployeesWithoutClientAndTheirOffice() {
+        return employeeService.findEmployeesWithoutClientAndTheirOffice();
+    }
+
+    @GetMapping("/without-office-and-client")
+    public List<Employee> findEmployeesWithoutOfficeAndClient() {
+        return employeeService.findEmployeesWithoutOfficeAndClient();
+    }
+
+    @GetMapping("/without-client-and-manager")
+    public List<Object[]> findEmployeesWithoutClientAndTheirManager() {
+        return employeeService.findEmployeesWithoutClientAndTheirManager();
+    }
+
+    @GetMapping("/count")
+    public Long countEmployees() {
+        return employeeService.countEmployees();
+    }
+
+    /* 
+
+    @GetMapping("/sales-representatives")
+    public List<Object[]> findSalesRepresentativesAndTheirClients() {
+        return employeeService.findSalesRepresentativesAndTheirClients();
+    }
+
+    */
+    
 
 
 }

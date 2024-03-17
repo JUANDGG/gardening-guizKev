@@ -23,5 +23,25 @@ public class PaymentController {
     public List<Payment> getAllPayment(){
         return paymentService.getAllPayment();
     }
+
+    @GetMapping("/year2008/paypal")
+    public List<Payment> findPaymentsInYear2008WithPayPal() {
+        return paymentService.findPaymentsInYear2008WithPayPal();
+    }
+
+    @GetMapping("/forms")
+    public List<String> findAllPaymentForms() {
+        return paymentService.findAllPaymentForms();
+    }
+
+    @GetMapping("/average/2009")
+    public Double findAveragePaymentInYear2009() {
+        return paymentService.findAveragePaymentInYear2009();
+    }
+
+    @GetMapping("/totalperyear")
+    public List<Object[]> findTotalPaymentsPerYear() {
+        return paymentService.findTotalPaymentsPerYear();
+    }
     
 }

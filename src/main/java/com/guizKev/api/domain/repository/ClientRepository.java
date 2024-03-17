@@ -22,7 +22,6 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
         @Query("SELECT c.clientCode, c.clientName, c.city, c.employee.employeeCode FROM Client c WHERE c.city = 'Madrid' AND c.employee.employeeCode IN (11, 30)")
         List<Object[]> clientsFromMadridWithSalesRepresentatives11Or30();
    
-        
        // 4. Obtains a list with the name of each client and the name and last name of their sales representative.
         @Query("SELECT c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative FROM Client c JOIN c.employee e GROUP BY c.clientName, e.firstName, e.lastName1")
         List<Object[]> getClientsWithSalesRepresentatives();
@@ -73,7 +72,6 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
        @Query("SELECT DISTINCT c FROM Client c JOIN c.order o LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")
        List<Client> getClientsWithOrdersWithoutPayments();
       
-
        
        // 16. Returns the count of clients for each country.
        @Query("SELECT c.country, COUNT(c) FROM Client c GROUP BY c.country")

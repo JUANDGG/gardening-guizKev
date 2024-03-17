@@ -19,4 +19,46 @@ public class OrderDetailServiceImpl implements OrderDetailService{
         return orderDetailRepository.findAll();
     }
     
+    @Override
+    public List<Object[]> countDistinctProductsInEachOrder() {
+        return orderDetailRepository.countDistinctProductsInEachOrder();
+    }
+
+    @Override
+    public List<Object[]> sumTotalQuantityOfProductsInEachOrder() {
+        return orderDetailRepository.sumTotalQuantityOfProductsInEachOrder();
+    }
+
+    /*
+    
+    @Override
+    public Object[] calculateBilling() {
+        return orderDetailRepository.calculateBilling();
+    }
+    */
+
+    /* 
+    @Override
+    public List<Object[]> calculateBillingByProduct() {
+        return orderDetailRepository.calculateBillingByProduct();
+    }
+
+    */
+
+    /*
+    @Override
+    public List<Object[]> calculateBillingByProductStartingWith() {
+        return orderDetailRepository.calculateBillingByProductStartingWith();
+    }
+
+    
+
+
+    @Override
+    public List<Object[]> calculateTotalSalesForProductsOver3000Euros() {
+        return orderDetailRepository.calculateTotalSalesForProductsOver3000Euros();
+    }
+
+    */
+    
 }

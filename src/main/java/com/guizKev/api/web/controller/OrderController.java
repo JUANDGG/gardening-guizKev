@@ -22,4 +22,35 @@ public class OrderController {
         return orderService.getAllOrder() ;
     }
 
+    
+    @GetMapping("/distinct-states")
+    public List<String> findDistinctOrderStates() {
+        return orderService.findDistinctOrderStates();
+    }
+
+    @GetMapping("/not-delivered-on-time")
+    public List<Object[]> findOrdersNotDeliveredOnTime() {
+        return orderService.findOrdersNotDeliveredOnTime();
+    }
+
+    @GetMapping("/delivered-two-days-before-expected-date")
+    public List<Object[]> findOrdersDeliveredTwoDaysBeforeExpectedDate() {
+        return orderService.findOrdersDeliveredTwoDaysBeforeExpectedDate();
+    }
+
+    @GetMapping("/rejected-in-2009")
+    public List<Object[]> findRejectedOrdersIn2009() {
+        return orderService.findRejectedOrdersIn2009();
+    }
+
+    @GetMapping("/delivered-in-january")
+    public List<Object[]> findOrdersDeliveredInJanuary() {
+        return orderService.findOrdersDeliveredInJanuary();
+    }
+
+    @GetMapping("/count-by-state")
+    public List<Object[]> countOrdersByState() {
+        return orderService.countOrdersByState();
+    }
+
 }

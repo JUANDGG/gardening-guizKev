@@ -7,5 +7,9 @@ import com.guizKev.api.persistence.entity.Payment;
 public interface  PaymentService {
     
     List<Payment> getAllPayment();
+    List<Payment> findPaymentsInYear2008WithPayPal();
+    List<String> findAllPaymentForms();
+    Double findAveragePaymentInYear2009();
+    List<Object[]> findTotalPaymentsPerYear();
     
 } 

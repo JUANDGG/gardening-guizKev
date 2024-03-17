@@ -19,4 +19,27 @@ public class OfficeServiceImpl implements OfficeService {
         return officeRepository.findAll();
     }
     
+
+    @Override
+    public List<Object[]> findAllOfficeCodesAndCities() {
+        return officeRepository.findAllOfficeCodesAndCities();
+    }
+
+    @Override
+    public List<Object[]> findCitiesAndPhonesInSpain() {
+        return officeRepository.findCitiesAndPhonesInSpain();
+    }
+
+    @Override
+    public List<Object[]> findOfficeAddressesWithClientsInFuenlabrada() {
+        return officeRepository.findOfficeAddressesWithClientsInFuenlabrada();
+    }
+
+    /* 
+    @Override
+    public List<Office> findOfficesWithoutSalesRepsForFruitsProducts() {
+        return officeRepository.findOfficesWithoutSalesRepsForFruitsProducts();
+    }
+    */
+
 }

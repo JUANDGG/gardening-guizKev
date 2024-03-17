@@ -19,4 +19,71 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+
+    @Override
+    public Object findCompanyManager() {
+        return employeeRepository.findCompanyManager();
+    }
+
+    @Override
+    public List<Object[]> findNonSalesRepresentatives() {
+        return employeeRepository.findNonSalesRepresentatives();
+    }
+
+    @Override
+    public List<Object[]> findEmployeesWithManagers() {
+        return employeeRepository.findEmployeesWithManagers();
+    }
+
+    @Override
+    public List<Object[]> findEmployeesWithManagersAndManagerOfManagers() {
+        return employeeRepository.findEmployeesWithManagersAndManagerOfManagers();
+    }
+
+    @Override
+    public List<Employee> findEmployeesWithoutOffice() {
+        return employeeRepository.findEmployeesWithoutOffice();
+    }
+
+    @Override
+    public List<Object[]> findEmployeesWithoutClient() {
+        return employeeRepository.findEmployeesWithoutClient();
+    }
+
+    @Override
+    public List<Object[]> findEmployeesWithoutClientAndTheirOffice() {
+        return employeeRepository.findEmployeesWithoutClientAndTheirOffice();
+    }
+
+    @Override
+    public List<Employee> findEmployeesWithoutOfficeAndClient() {
+        return employeeRepository.findEmployeesWithoutOfficeAndClient();
+    }
+
+    @Override
+    public List<Object[]> findEmployeesWithoutClientAndTheirManager() {
+        return employeeRepository.findEmployeesWithoutClientAndTheirManager();
+    }
+
+    @Override
+    public Long countEmployees() {
+        return employeeRepository.countEmployees();
+    }
+
+    /* 
+
+    @Override
+    public List<Object[]> findSalesRepresentativesAndTheirClients() {
+        return employeeRepository.findSalesRepresentativesAndTheirClients();
+    }
+
+    */
+
+    @Override
+    public List<Object[]> findEmployeesByManagerCode() {
+        return employeeRepository.findEmployeesByManagerCode();
+    }
+
+  
+  
 }

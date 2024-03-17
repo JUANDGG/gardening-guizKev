@@ -20,5 +20,28 @@ public class OfficeController {
     public List<Office> getAllEmployee() {
         return officeService.getAllOffice();
     }
+
+    
+    @GetMapping("/codes")
+    public List<Object[]> getAllCodesAndCities() {
+        return officeService.findAllOfficeCodesAndCities();
+    }
+
+    @GetMapping("/cities/spain")
+    public List<Object[]> getCitiesAndPhonesInSpain() {
+        return officeService.findCitiesAndPhonesInSpain();
+    }
+
+    @GetMapping("/addresses/fuenlabrada")
+    public List<Object[]> getOfficeAddressesWithClientsInFuenlabrada() {
+        return officeService.findOfficeAddressesWithClientsInFuenlabrada();
+    }
+
+    /* 
+    @GetMapping("/withoutReps/fruits")
+    public List<Office> getOfficesWithoutSalesRepsForFruitsProducts() {
+        return officeService.findOfficesWithoutSalesRepsForFruitsProducts();
+    }
+    */
     
 }

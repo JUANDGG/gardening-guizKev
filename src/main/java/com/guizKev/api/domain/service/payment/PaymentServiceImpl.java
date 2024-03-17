@@ -18,5 +18,25 @@ public class PaymentServiceImpl implements PaymentService {
     public List<Payment> getAllPayment() {
         return paymentRepository.findAll() ;
     }
+
+    @Override
+    public List<Payment> findPaymentsInYear2008WithPayPal() {
+        return paymentRepository.findPaymentsInYear2008WithPayPal();
+    }
+
+    @Override
+    public List<String> findAllPaymentForms() {
+        return paymentRepository.findAllPaymentForms();
+    }
+
+    @Override
+    public Double findAveragePaymentInYear2009() {
+        return paymentRepository.findAveragePaymentInYear2009();
+    }
+
+    @Override
+    public List<Object[]> findTotalPaymentsPerYear() {
+        return paymentRepository.findTotalPaymentsPerYear();
+    }
     
 }
