@@ -1275,6 +1275,11 @@ The project will utilize the following technologies:
 
 ![Class Diagram]() 
 
+## Security
+![Create the Web Token](/imagesDocumentation/PostUserPassWebToken.png)
+
+![Get Data with Web Token](/imagesDocumentation/GetWithWebToken.png)
+
 ## Features
 The software will include the following features:
 - Office and employee management
