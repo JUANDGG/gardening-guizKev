@@ -31,18 +31,18 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<Object[]> findOrdersDeliveredTwoDaysBeforeExpectedDate() {
-        return orderRepository.findOrdersDeliveredTwoDaysBeforeExpectedDate();
+    public List<Object[]> findOrdersDeliveredDaysBeforeExpectedDate(int daysBefore) {
+        return orderRepository.findOrdersDeliveredDaysBeforeExpectedDate(daysBefore);
     }
 
     @Override
-    public List<Object[]> findRejectedOrdersIn2009() {
-        return orderRepository.findRejectedOrdersIn2009();
+    public List<Object[]> findRejectedOrdersInYear(int year) {
+        return orderRepository.findRejectedOrdersInYear(year);
     }
 
     @Override
-    public List<Object[]> findOrdersDeliveredInJanuary() {
-        return orderRepository.findOrdersDeliveredInJanuary();
+    public List<Object[]> findOrdersDeliveredInMonth(int month) {
+        return orderRepository.findOrdersDeliveredInMonth(month);
     }
 
     @Override

@@ -10,9 +10,9 @@ import com.guizKev.api.persistence.entity.Client;
 
 public interface ClientService {
 
-    List<Client> getALLCLIENT ();
-    List<String> getClientNamesFromSpain();
-    List<Integer> getClientCodesWithPaymentsIn2008();
+    List<Client> getAllClients();
+    List<String> getClientNamesFromCountry(String country);
+    List<Integer> getClientCodesWithPaymentsInYear(int year);
     List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30();
     List<Object[]> getClientsWithSalesRepresentatives();
     List<Object[]> getClientsWithPaymentsAndSalesRepresentatives();
@@ -31,8 +31,8 @@ public interface ClientService {
     List<Client> getClientsWithOrdersWithoutPayments();
     List<Object[]> getClientCountByCountry();
     Long getClientCount();
-    Long getClientCountInMadrid();
-    List<Object[]> getClientCountByCityStartingWithM();
+    Long getClientCountInCity(String city);
+    List<Object[]> getClientCountByCityStartingWith(String letter);
     Long getClientCountWithoutSalesRepresentative();
     List<Object[]> getFirstAndLastPaymentDatesByClient();
     

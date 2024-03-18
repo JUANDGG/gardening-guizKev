@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.guizKev.api.persistence.entity.Client;
@@ -11,12 +12,12 @@ import com.guizKev.api.persistence.entity.Client;
 public interface ClientRepository extends JpaRepository<Client , Integer>{
 
        // 1. Retrieves a list with the names of all Spanish clients.
-       @Query("SELECT c.clientName FROM Client c WHERE c.country = 'Spain'")
-       List<String> clientFromSpain();
+       @Query("SELECT c.clientName FROM Client c WHERE c.country = :country")
+       List<String> clientFromCountry(@Param("country") String country);
    
      // 2. Retrieves a list with the client codes of those clients who made a payment in 2008. Removes duplicate client codes.
-      @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = 2008 GROUP BY c.clientCode")
-      List<Integer> clientCodesWithPaymentsIn2008();
+        @Query("SELECT DISTINCT c.clientCode FROM Client c JOIN c.payment p WHERE FUNCTION('YEAR', p.paymentDate) = :year GROUP BY c.clientCode")
+        List<Integer> clientCodesWithPaymentsInYear(@Param("year") int year);
    
       // 3. Retrieves a list of all clients who are from the city of Madrid and whose sales representative has the employee code 11 or 30.
         @Query("SELECT c.clientCode, c.clientName, c.city, c.employee.employeeCode FROM Client c WHERE c.city = 'Madrid' AND c.employee.employeeCode IN (11, 30)")
@@ -82,13 +83,15 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
        Long getClientCount();
    
        // 18. Returns the count of clients with an address in the city of Madrid.
-       @Query("SELECT COUNT(c) FROM Client c WHERE c.city = 'Madrid'")
-       Long getClientCountInMadrid();
-   
-       // 19. Calculates the count of clients in each city starting with the letter 'M'.
-       @Query("SELECT c.city, COUNT(c) FROM Client c WHERE c.city LIKE 'M%' GROUP BY c.city")
-       List<Object[]> getClientCountByCityStartingWithM();
-   
+       @Query("SELECT COUNT(c) FROM Client c WHERE LOWER(c.city) = LOWER(:city)")
+       Long getClientCountInCity(@Param("city") String city);
+       
+      
+       // 19. Calculates the count of clients in each city starting with a specific letter.
+      @Query("SELECT c.city, COUNT(c) FROM Client c WHERE c.city LIKE :letter% GROUP BY c.city")
+      List<Object[]> getClientCountByCityStartingWith(@Param("letter") String letter);
+
+
        // 20. Calculates the number of clients without a sales representative assigned.
        @Query("SELECT COUNT(c) FROM Client c WHERE c.employee IS NULL")
        Long getClientCountWithoutSalesRepresentative();

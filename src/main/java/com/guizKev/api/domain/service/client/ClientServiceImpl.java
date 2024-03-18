@@ -18,31 +18,29 @@ public class ClientServiceImpl implements ClientService {
     private  ClientRepository clientRepository ;
 
     @Override
-    public List<Client> getALLCLIENT(){
-        return clientRepository.findAll() ;
-     }
-
-
-    @Override
-    public List<String> getClientNamesFromSpain() {
-        return clientRepository.clientFromSpain();
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
     }
 
     @Override
-    public List<Integer> getClientCodesWithPaymentsIn2008() {
-        return clientRepository.clientCodesWithPaymentsIn2008();
+    public List<String> getClientNamesFromCountry(String country) {
+        return clientRepository.clientFromCountry(country);
+    }
+
+    @Override
+    public List<Integer> getClientCodesWithPaymentsInYear(int year) {
+        return clientRepository.clientCodesWithPaymentsInYear(year);
     }
 
     @Override
     public List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30() {
         return clientRepository.clientsFromMadridWithSalesRepresentatives11Or30();
     }
-    
+
     @Override
     public List<Object[]> getClientsWithSalesRepresentatives() {
         return clientRepository.getClientsWithSalesRepresentatives();
     }
-
 
     @Override
     public List<Object[]> getClientsWithPaymentsAndSalesRepresentatives() {
@@ -64,28 +62,15 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     }
 
-
-     
     @Override
     public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
         return clientRepository.getClientsAndSalesRepresentativesWithOfficeCity();
     }
-     
 
     @Override
     public List<String> getClientsWithLateOrders() {
         return clientRepository.getClientsWithLateOrders();
     }
-    
-
-    /* 
-    @Override
-    public List<Object[]> getPurchasedProductRangesByClient() {
-        return clientRepository.getPurchasedProductRangesByClient();
-    }
-
-    */
-
 
     @Override
     public List<Client> getClientsWithoutPayments() {
@@ -118,13 +103,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Long getClientCountInMadrid() {
-        return clientRepository.getClientCountInMadrid();
+    public Long getClientCountInCity(String city) {
+        return clientRepository.getClientCountInCity(city);
     }
 
     @Override
-    public List<Object[]> getClientCountByCityStartingWithM() {
-        return clientRepository.getClientCountByCityStartingWithM();
+    public List<Object[]> getClientCountByCityStartingWith(String letter) {
+        return clientRepository.getClientCountByCityStartingWith(letter);
     }
 
     @Override
@@ -136,5 +121,15 @@ public class ClientServiceImpl implements ClientService {
     public List<Object[]> getFirstAndLastPaymentDatesByClient() {
         return clientRepository.getFirstAndLastPaymentDatesByClient();
     }
+
+    /* 
+    @Override
+    public List<Object[]> getPurchasedProductRangesByClient() {
+        return clientRepository.getPurchasedProductRangesByClient();
+    }
+
+    */
+
+
     
 }

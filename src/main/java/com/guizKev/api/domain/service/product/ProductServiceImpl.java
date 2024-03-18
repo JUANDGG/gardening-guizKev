@@ -16,27 +16,27 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> findOrnamentalProductsByStock() {
-        return productRepository.findOrnamentalProductsByStock();
+    public List<Product> findProductsByRangeAndStock(String range, int quantity) {
+        return productRepository.findProductsByRangeAndStock(range, quantity);
     }
 
     @Override
-    public List<Product> findProductsNotInOrders() {
-        return productRepository.findProductsNotInOrders();
+    public List<Product> findProductsNotInOrders(Long orderId) {
+        return productRepository.findProductsNotInOrders(orderId);
     }
 
     @Override
-    public List<Object[]> findProductsNotInOrdersWithDetails() {
-        return productRepository.findProductsNotInOrdersWithDetails();
+    public List<Object[]> findProductsNotInOrdersWithDetails(Long orderId) {
+        return productRepository.findProductsNotInOrdersWithDetails(orderId);
     }
 
     @Override
-    public Optional<Object[]> findMaxAndMinSalesPrice() {
-        return productRepository.findMaxAndMinSalesPrice();
+    public Optional<Object[]> findMaxAndMinSalesPrice(String range) {
+        return productRepository.findMaxAndMinSalesPrice(range);
     }
 
     @Override
-    public List<Object[]> findTop20ProductsByUnitsSold() {
-        return productRepository.findTop20ProductsByUnitsSold();
+    public List<Object[]> findTopProductsByUnitsSold(String range) {
+        return productRepository.findTopProductsByUnitsSold(range);
     }
 }

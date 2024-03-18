@@ -10,8 +10,8 @@ public interface OrderService {
     List<Order> getAllOrder();
     List<String> findDistinctOrderStates();
     List<Object[]> findOrdersNotDeliveredOnTime();
-    List<Object[]> findOrdersDeliveredTwoDaysBeforeExpectedDate();
-    List<Object[]> findRejectedOrdersIn2009();
-    List<Object[]> findOrdersDeliveredInJanuary();
+    List<Object[]> findOrdersDeliveredDaysBeforeExpectedDate(int daysBefore);
+    List<Object[]> findRejectedOrdersInYear(int year);
+    List<Object[]> findOrdersDeliveredInMonth(int month);
     List<Object[]> countOrdersByState();
 }

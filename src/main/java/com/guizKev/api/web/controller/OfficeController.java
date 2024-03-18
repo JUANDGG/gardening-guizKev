@@ -1,4 +1,6 @@
 package com.guizKev.api.web.controller;
+
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.guizKev.api.domain.service.office.OfficeService;
@@ -6,8 +8,6 @@ import com.guizKev.api.persistence.entity.Office;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-
-
 
 @RestController
 @RequestMapping(value = "/office")
@@ -21,20 +21,19 @@ public class OfficeController {
         return officeService.getAllOffice();
     }
 
-    
     @GetMapping("/codes")
     public List<Object[]> getAllCodesAndCities() {
         return officeService.findAllOfficeCodesAndCities();
     }
 
-    @GetMapping("/cities/spain")
-    public List<Object[]> getCitiesAndPhonesInSpain() {
-        return officeService.findCitiesAndPhonesInSpain();
+    @GetMapping("/cities/{country}")
+    public List<Object[]> getCitiesAndPhonesInCountry(@PathVariable String country) {
+        return officeService.findCitiesAndPhonesInCountry(country);
     }
 
-    @GetMapping("/addresses/fuenlabrada")
-    public List<Object[]> getOfficeAddressesWithClientsInFuenlabrada() {
-        return officeService.findOfficeAddressesWithClientsInFuenlabrada();
+    @GetMapping("/addresses/{city}")
+    public List<Object[]> getOfficeAddressesWithClientsInCity(@PathVariable String city) {
+        return officeService.findOfficeAddressesWithClientsInCity(city);
     }
 
     /* 

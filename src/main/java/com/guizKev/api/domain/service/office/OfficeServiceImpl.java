@@ -26,13 +26,13 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public List<Object[]> findCitiesAndPhonesInSpain() {
-        return officeRepository.findCitiesAndPhonesInSpain();
+    public List<Object[]> findCitiesAndPhonesInCountry(String country) {
+        return officeRepository.findCitiesAndPhonesInCountry(country);
     }
 
     @Override
-    public List<Object[]> findOfficeAddressesWithClientsInFuenlabrada() {
-        return officeRepository.findOfficeAddressesWithClientsInFuenlabrada();
+    public List<Object[]> findOfficeAddressesWithClientsInCity(String city) {
+        return officeRepository.findOfficeAddressesWithClientsInCity(city);
     }
 
     /* 

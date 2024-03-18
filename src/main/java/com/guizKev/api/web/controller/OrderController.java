@@ -3,7 +3,10 @@ package com.guizKev.api.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +14,7 @@ import com.guizKev.api.domain.service.order.OrderService;
 import com.guizKev.api.persistence.entity.Order;
 
 @RestController
-@RequestMapping(value = "/order")
+@RequestMapping(value = "/orders")
 public class OrderController {
 
     @Autowired 
@@ -33,24 +36,25 @@ public class OrderController {
         return orderService.findOrdersNotDeliveredOnTime();
     }
 
-    @GetMapping("/delivered-two-days-before-expected-date")
-    public List<Object[]> findOrdersDeliveredTwoDaysBeforeExpectedDate() {
-        return orderService.findOrdersDeliveredTwoDaysBeforeExpectedDate();
+    @GetMapping("/delivered-days-before-expected/{daysBefore}")
+    public List<Object[]> findOrdersDeliveredDaysBeforeExpectedDate(@PathVariable int daysBefore) {
+        return orderService.findOrdersDeliveredDaysBeforeExpectedDate(daysBefore);
     }
 
-    @GetMapping("/rejected-in-2009")
-    public List<Object[]> findRejectedOrdersIn2009() {
-        return orderService.findRejectedOrdersIn2009();
+
+    //ERROR
+    @GetMapping("/rejected-in-year/{year}")
+    public List<Object[]> findRejectedOrdersInYear(@PathVariable int year) {
+        return orderService.findRejectedOrdersInYear(year);
     }
 
-    @GetMapping("/delivered-in-january")
-    public List<Object[]> findOrdersDeliveredInJanuary() {
-        return orderService.findOrdersDeliveredInJanuary();
+    @GetMapping("/delivered-in-month/{month}")
+    public List<Object[]> findOrdersDeliveredInMonth(@PathVariable int month) {
+        return orderService.findOrdersDeliveredInMonth(month);
     }
 
     @GetMapping("/count-by-state")
     public List<Object[]> countOrdersByState() {
         return orderService.countOrdersByState();
     }
-
 }
