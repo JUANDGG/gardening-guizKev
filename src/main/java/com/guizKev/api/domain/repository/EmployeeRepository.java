@@ -35,24 +35,26 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
      
      // 6. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
-     @Query("SELECT e FROM Employee e LEFT JOIN e.office o WHERE o.officeCode = :officeCode")
-     List<Employee> findEmployeesWithoutOffice(@Param("officeCode") Long officeCode);
+     @Query("SELECT e FROM Employee e LEFT JOIN e.office o WHERE o.officeCode IS NULL")
+     List<Employee> findEmployeesWithoutOffice();
 
      // 7. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
-     @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c.clientCode = :clientCode")
-     List<Object[]> findEmployeesWithoutClient(@Param("clientCode") Long clientCode);
+     @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c IS NULL")
+     List<Object[]> findEmployeesWithoutClient();
 
      // 8. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
-     @Query("SELECT e, o FROM Employee e JOIN e.office o LEFT JOIN e.client c WHERE c.clientCode = :clientCode")
-     List<Object[]> findEmployeesWithoutClientAndTheirOffice(@Param("clientCode") Long clientCode);
+     @Query("SELECT e, o FROM Employee e JOIN e.office o LEFT JOIN e.client c WHERE c IS NULL")
+     List<Object[]> findEmployeesWithoutClientAndTheirOffice();
 
      // 9. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
-     @Query("SELECT e FROM Employee e LEFT JOIN e.office o LEFT JOIN e.client c WHERE o.officeCode = :officeCode AND c.clientCode = :clientCode")
-     List<Employee> findEmployeesWithoutOfficeAndClient(@Param("officeCode") Long officeCode, @Param("clientCode") Long clientCode);
+     @Query("SELECT e FROM Employee e LEFT JOIN e.office o LEFT JOIN e.client c WHERE o.officeCode IS NULL AND c IS NULL")
+     List<Employee> findEmployeesWithoutOfficeAndClient();
 
      // 10. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado.
-     @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c.clientCode = :clientCode")
-     List<Object[]> findEmployeesWithoutClientAndTheirManager(@Param("clientCode") Long clientCode);
+     @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c IS NULL")
+     List<Object[]> findEmployeesWithoutClientAndTheirManager();
+
+
 
      // 11. ¿Cuántos empleados hay en la compañía?
      @Query("SELECT COUNT(e) FROM Employee e")

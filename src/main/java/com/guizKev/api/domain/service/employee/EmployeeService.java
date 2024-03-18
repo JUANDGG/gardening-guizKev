@@ -18,15 +18,15 @@ public interface EmployeeService {
 
     List<Object[]> findEmployeesWithManagersAndManagerOfManagers();
 
-    List<Employee> findEmployeesWithoutOffice(Long officeCode);
+    List<Employee> findEmployeesWithoutOffice();
 
-    List<Object[]> findEmployeesWithoutClient(Long clientCode);
+    List<Object[]> findEmployeesWithoutClient();
 
-    List<Object[]> findEmployeesWithoutClientAndTheirOffice(Long clientCode);
+    List<Object[]> findEmployeesWithoutClientAndTheirOffice();
 
-    List<Employee> findEmployeesWithoutOfficeAndClient(Long officeCode, Long clientCode);
+    List<Employee> findEmployeesWithoutOfficeAndClient();
 
-    List<Object[]> findEmployeesWithoutClientAndTheirManager(Long clientCode);
+    List<Object[]> findEmployeesWithoutClientAndTheirManager();
 
     Long countEmployees();
 

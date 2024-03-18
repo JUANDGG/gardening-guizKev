@@ -45,28 +45,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findEmployeesWithoutOffice(Long officeCode) {
-        return employeeRepository.findEmployeesWithoutOffice(officeCode);
+    public List<Employee> findEmployeesWithoutOffice() {
+        return employeeRepository.findEmployeesWithoutOffice();
     }
 
     @Override
-    public List<Object[]> findEmployeesWithoutClient(Long clientCode) {
-        return employeeRepository.findEmployeesWithoutClient(clientCode);
+    public List<Object[]> findEmployeesWithoutClient() {
+        return employeeRepository.findEmployeesWithoutClient();
     }
 
     @Override
-    public List<Object[]> findEmployeesWithoutClientAndTheirOffice(Long clientCode) {
-        return employeeRepository.findEmployeesWithoutClientAndTheirOffice(clientCode);
+    public List<Object[]> findEmployeesWithoutClientAndTheirOffice() {
+        return employeeRepository.findEmployeesWithoutClientAndTheirOffice();
     }
 
     @Override
-    public List<Employee> findEmployeesWithoutOfficeAndClient(Long officeCode, Long clientCode) {
-        return employeeRepository.findEmployeesWithoutOfficeAndClient(officeCode, clientCode);
+    public List<Employee> findEmployeesWithoutOfficeAndClient() {
+        return employeeRepository.findEmployeesWithoutOfficeAndClient();
     }
 
     @Override
-    public List<Object[]> findEmployeesWithoutClientAndTheirManager(Long clientCode) {
-        return employeeRepository.findEmployeesWithoutClientAndTheirManager(clientCode);
+    public List<Object[]> findEmployeesWithoutClientAndTheirManager() {
+        return employeeRepository.findEmployeesWithoutClientAndTheirManager();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class EmployeeController {
     public List<Object[]> findEmployeesByManagerCode(@PathVariable Long managerCode) {
         return employeeService.findEmployeesByManagerCode(managerCode);
     }
-    // ERROR 
+    
     @GetMapping("/company/manager")
     public Object findCompanyManager() {
         return employeeService.findCompanyManager();
@@ -49,30 +49,30 @@ public class EmployeeController {
         return employeeService.findEmployeesWithManagersAndManagerOfManagers();
     }
 
-    @GetMapping("/without-office/{officeCode}")
-    public List<Employee> findEmployeesWithoutOffice(@PathVariable Long officeCode) {
-        return employeeService.findEmployeesWithoutOffice(officeCode);
+    @GetMapping("/without-office")
+    public List<Employee> findEmployeesWithoutOffice() {
+        return employeeService.findEmployeesWithoutOffice();
     }
 
-    @GetMapping("/without-client/{clientCode}")
-    public List<Object[]> findEmployeesWithoutClient(@PathVariable Long clientCode) {
-        return employeeService.findEmployeesWithoutClient(clientCode);
+    @GetMapping("/without-client")
+    public List<Object[]> findEmployeesWithoutClient() {
+        return employeeService.findEmployeesWithoutClient();
     }
 
-    @GetMapping("/without-client-and-office/{clientCode}")
-    public List<Object[]> findEmployeesWithoutClientAndTheirOffice(@PathVariable Long clientCode) {
-        return employeeService.findEmployeesWithoutClientAndTheirOffice(clientCode);
+    @GetMapping("/without-client-and-office")
+    public List<Object[]> findEmployeesWithoutClientAndTheirOffice() {
+        return employeeService.findEmployeesWithoutClientAndTheirOffice();
     }
 
-    //error
-    @GetMapping("/without-office-and-client/{officeCode}/{clientCode}")
-    public List<Employee> findEmployeesWithoutOfficeAndClient(@PathVariable Long officeCode, @PathVariable Long clientCode) {
-        return employeeService.findEmployeesWithoutOfficeAndClient(officeCode, clientCode);
+
+    @GetMapping("/without-office-and-client")
+    public List<Employee> findEmployeesWithoutOfficeAndClient() {
+        return employeeService.findEmployeesWithoutOfficeAndClient();
     }
 
-    @GetMapping("/without-client-and-manager/{clientCode}")
-    public List<Object[]> findEmployeesWithoutClientAndTheirManager(@PathVariable Long clientCode) {
-        return employeeService.findEmployeesWithoutClientAndTheirManager(clientCode);
+    @GetMapping("/without-client-and-manager")
+    public List<Object[]> findEmployeesWithoutClientAndTheirManager() {
+        return employeeService.findEmployeesWithoutClientAndTheirManager();
     }
 
     @GetMapping("/count")
