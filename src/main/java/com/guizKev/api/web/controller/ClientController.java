@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -25,63 +27,63 @@ public class ClientController {
         return clientService.getAllClients();
     }
 
-    //PERFET
+    //PERFET 1
     @GetMapping("/names/{country}")
     public List<String> getClientNamesFromCountry(@PathVariable String country) {
         return clientService.getClientNamesFromCountry(country);
     }
 
 
-    //PERFET
+    //PERFET 2
     @GetMapping("/codes/payments/{year}")
     public List<Integer> getClientCodesWithPaymentsInYear(@PathVariable int year) {
         return clientService.getClientCodesWithPaymentsInYear(year);
     }
 
-     //PERFECT
-    @GetMapping("/orders-no-payments")
+     //PERFECT 3
+    @GetMapping("/employee-city-code")
     public List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30() {
         return clientService.getClientsFromMadridWithSalesRepresentatives11Or30();
     }
 
-     //PERFET
+     //PERFET 4
     @GetMapping("/sales-representatives")
     public List<Object[]> getClientsWithSalesRepresentatives() {
         return clientService.getClientsWithSalesRepresentatives();
     }
 
-    //PERFET
+    //PERFET 5
     @GetMapping("/payments-sales-representatives")
     public List<Object[]> getClientsWithPaymentsAndSalesRepresentatives() {
         return clientService.getClientsWithPaymentsAndSalesRepresentatives();
     }
 
-    //QUERY WITH JPQL ERROR QUERY NUMBER 6 MYSQL FALTA QUERIS
+    //PERFET 6
     @GetMapping("/no-payments-sales-representatives")
     public List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives() {
         return clientService.getClientsWithoutPaymentsAndWithSalesRepresentatives();
     }
 
-    //PERFET
+    //PERFET 7
     @GetMapping("/payments-representative-office-city")
     public List<Object[]> getClientsWithPaymentsAndRepresentativeOfficeCity() {
         return clientService.getClientsWithPaymentsAndRepresentativeOfficeCity();
     }
 
 
-    //PERFET
+    //PERFET 8
     @GetMapping("/no-payments-representative-office-city")
     public List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity() {
         return clientService.getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     }
     
-    //PERFET
+    //PERFET 9
     @GetMapping("/late-orders")
     public List<String> getClientsWithLateOrders() {
         return clientService.getClientsWithLateOrders();
     }
 
-
+    // error 10 
       /* 
     @GetMapping("/purchased-product-ranges")
     public List<Object[]> getPurchasedProductRangesByClient() {
@@ -90,35 +92,45 @@ public class ClientController {
 
     */
 
-    //PERFECT
+    //PERFECT 11
     @GetMapping("/no-payments")
     public List<Client> getClientsWithoutPayments() {
         return clientService.getClientsWithoutPayments();
     }
 
 
-    //PERFECT
+    //PERFECT 12
     @GetMapping("/no-orders")
     public List<Client> getClientsWithoutOrders() {
         return clientService.getClientsWithoutOrders();
     }
 
-    //PERFECT
+    //PERFECT 13
     @GetMapping("/no-payments-no-orders")
     public List<Client> getClientsWithoutPaymentsAndOrders() {
         return clientService.getClientsWithoutPaymentsAndOrders();
     }
-    
-    //FALTA 14 CONSULTA README ACA ..
 
-    //PERFETC
+    
+    
+    //PERFECT 14
+    @GetMapping("/orders-no-payments")
+    public List<Client> getClientsWithOrdersWithoutPayments(){
+        return clientService.getClientsWithOrdersWithoutPayments();
+    }
+
+    
+    
+    
+
+    //PERFETC 15
     @GetMapping("/count-by-country")
     public List<Object[]> getClientCountByCountry() {
         return clientService.getClientCountByCountry();
     }
 
 
-    //PERFETC
+    //PERFETC 16
     @GetMapping("/count")
     public Long getClientCount() {
         return clientService.getClientCount();
@@ -126,33 +138,33 @@ public class ClientController {
 
 
 
-    //PERFETC
+    //PERFETC 17
     @GetMapping("/count-in-city/{city}")
     public Long getClientCountInCity(@PathVariable String city) {
         return clientService.getClientCountInCity(city);
     }
 
-    //PERFETC
+    //PERFETC 18
     @GetMapping("/count-by-city-starting-with/{letter}")
     public List<Object[]> getClientCountByCityStartingWith(@PathVariable String letter) {
         return clientService.getClientCountByCityStartingWith(letter);
     }
 
 
-    //PERFETC
+    //PERFETC 19
     @GetMapping("/count-without-sales-representative")
     public Long getClientCountWithoutSalesRepresentative() {
         return clientService.getClientCountWithoutSalesRepresentative();
     }
 
-    //PERFETC
+    //PERFETC 20
     @GetMapping("/first-and-last-payment-dates")
     public List<Object[]> getFirstAndLastPaymentDatesByClient() {
         return clientService.getFirstAndLastPaymentDatesByClient();
     }
 
 
-    //PERFETC
+    //PERFETC 21
     @GetMapping("/clients-sales-representatives-office-city")
     public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
         return clientService.getClientsAndSalesRepresentativesWithOfficeCity();

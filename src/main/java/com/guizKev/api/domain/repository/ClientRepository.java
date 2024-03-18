@@ -32,7 +32,8 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
         List<Object[]> getClientsWithPaymentsAndSalesRepresentatives();
 
         // 6. Shows the names of clients who haven't made payments along with the name of their sales representatives.
-        @Query("SELECT c.clientCode, c.clientName, CONCAT(e.firstName, ' ', e.lastName1) AS SalesRepresentative FROM Client c LEFT JOIN c.payment p JOIN c.employee e WHERE p.client.clientCode IS NULL GROUP BY c.clientCode, c.clientName, e.firstName, e.lastName1")
+      
+        @Query("SELECT c.clientCode AS codigoCliente, c.clientName AS nombreCliente, e.firstName AS nombreRepresentanteVentas FROM Client c LEFT JOIN c.payment p LEFT JOIN c.employee e GROUP BY c.clientCode")
         List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives();
 
         // 7. Returns the names of clients who have made payments and the name of their sales representatives along with the city of the office to which the representative belongs.
