@@ -20,21 +20,25 @@ public class PaymentController {
         return paymentService.getAllPayment();
     }
 
+    //PERFECT
     @GetMapping("/year/{year}/paymentForm/{paymentForm}")
     public List<Payment> findPaymentsInYearWithPaymentForm(@PathVariable int year, @PathVariable String paymentForm) {
         return paymentService.findPaymentsInYearWithPaymentForm(year, paymentForm);
     }
+    //PERFECT
 
     @GetMapping("/forms")
     public List<String> findAllPaymentForms() {
         return paymentService.findAllPaymentForms();
     }
 
+    //PERFECT
     @GetMapping("/average/{year}")
     public Double findAveragePaymentInYear(@PathVariable int year) {
         return paymentService.findAveragePaymentInYear(year);
     }
 
+    //PERFECT
     @GetMapping("/totalperyear")
     public List<Object[]> findTotalPaymentsPerYear() {
         return paymentService.findTotalPaymentsPerYear();

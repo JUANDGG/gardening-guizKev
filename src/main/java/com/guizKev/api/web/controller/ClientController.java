@@ -19,139 +19,150 @@ public class ClientController {
     @Autowired
     private ClientService  clientService ;
 
-    //PERFECT
+    
     @GetMapping("/all")
     public List<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
-    //PERFECT 
+    //PERFET
     @GetMapping("/names/{country}")
     public List<String> getClientNamesFromCountry(@PathVariable String country) {
         return clientService.getClientNamesFromCountry(country);
     }
 
 
-    //PERFECT  
+    //PERFET
     @GetMapping("/codes/payments/{year}")
     public List<Integer> getClientCodesWithPaymentsInYear(@PathVariable int year) {
         return clientService.getClientCodesWithPaymentsInYear(year);
     }
 
-    //PERFECT  
+     //PERFECT
     @GetMapping("/orders-no-payments")
     public List<Object[]> getClientsFromMadridWithSalesRepresentatives11Or30() {
         return clientService.getClientsFromMadridWithSalesRepresentatives11Or30();
     }
 
-    //PERFECT  
+     //PERFET
     @GetMapping("/sales-representatives")
     public List<Object[]> getClientsWithSalesRepresentatives() {
         return clientService.getClientsWithSalesRepresentatives();
     }
 
-    //PERFECT  
+    //PERFET
     @GetMapping("/payments-sales-representatives")
     public List<Object[]> getClientsWithPaymentsAndSalesRepresentatives() {
         return clientService.getClientsWithPaymentsAndSalesRepresentatives();
     }
 
-    //QUERY WITH JPQL ERROR QUERY NUMBER 6 MYSQL
+    //QUERY WITH JPQL ERROR QUERY NUMBER 6 MYSQL FALTA QUERIS
     @GetMapping("/no-payments-sales-representatives")
     public List<Object[]> getClientsWithoutPaymentsAndWithSalesRepresentatives() {
         return clientService.getClientsWithoutPaymentsAndWithSalesRepresentatives();
     }
 
-    //PERFECT 
+    //PERFET
     @GetMapping("/payments-representative-office-city")
     public List<Object[]> getClientsWithPaymentsAndRepresentativeOfficeCity() {
         return clientService.getClientsWithPaymentsAndRepresentativeOfficeCity();
     }
 
-    //PERFECT 
+
+    //PERFET
     @GetMapping("/no-payments-representative-office-city")
     public List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity() {
         return clientService.getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     }
     
-    
-    //PERFECT 
-    @GetMapping("/clients-sales-representatives-office-city")
-    public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
-        return clientService.getClientsAndSalesRepresentativesWithOfficeCity();
-    }
-
-    //PERFECT 
+    //PERFET
     @GetMapping("/late-orders")
     public List<String> getClientsWithLateOrders() {
         return clientService.getClientsWithLateOrders();
     }
 
-    //PERFECT 
-    @GetMapping("/no-payments")
-    public List<Client> getClientsWithoutPayments() {
-        return clientService.getClientsWithoutPayments();
-    }
 
-
-    //PERFECT 
-    @GetMapping("/no-orders")
-    public List<Client> getClientsWithoutOrders() {
-        return clientService.getClientsWithoutOrders();
-    }
-
-     //PERFECT 
-    @GetMapping("/no-payments-no-orders")
-    public List<Client> getClientsWithoutPaymentsAndOrders() {
-        return clientService.getClientsWithoutPaymentsAndOrders();
-    }
-
-    
-     //PERFECT 
-    @GetMapping("/count-by-country")
-    public List<Object[]> getClientCountByCountry() {
-        return clientService.getClientCountByCountry();
-    }
-
-    //PERFECT 
-    @GetMapping("/count")
-    public Long getClientCount() {
-        return clientService.getClientCount();
-    }
-
-    //PERFECT 
-    @GetMapping("/count-in-city/{city}")
-    public Long getClientCountInCity(@PathVariable String city) {
-        return clientService.getClientCountInCity(city);
-    }
-
-
-    //PERFET 
-    @GetMapping("/count-by-city-starting-with/{letter}")
-    public List<Object[]> getClientCountByCityStartingWith(@PathVariable String letter) {
-        return clientService.getClientCountByCityStartingWith(letter);
-    }
-
-    //PERFET 
-    @GetMapping("/count-without-sales-representative")
-    public Long getClientCountWithoutSalesRepresentative() {
-        return clientService.getClientCountWithoutSalesRepresentative();
-    }
-
-    //PERFET 
-
-    @GetMapping("/first-and-last-payment-dates")
-    public List<Object[]> getFirstAndLastPaymentDatesByClient() {
-        return clientService.getFirstAndLastPaymentDatesByClient();
-    }
-
-     /* 
+      /* 
     @GetMapping("/purchased-product-ranges")
     public List<Object[]> getPurchasedProductRangesByClient() {
         return clientService.getPurchasedProductRangesByClient();
     }
 
     */
+
+    //PERFECT
+    @GetMapping("/no-payments")
+    public List<Client> getClientsWithoutPayments() {
+        return clientService.getClientsWithoutPayments();
+    }
+
+
+    //PERFECT
+    @GetMapping("/no-orders")
+    public List<Client> getClientsWithoutOrders() {
+        return clientService.getClientsWithoutOrders();
+    }
+
+    //PERFECT
+    @GetMapping("/no-payments-no-orders")
+    public List<Client> getClientsWithoutPaymentsAndOrders() {
+        return clientService.getClientsWithoutPaymentsAndOrders();
+    }
+    
+    //FALTA 14 CONSULTA README ACA ..
+
+    //PERFETC
+    @GetMapping("/count-by-country")
+    public List<Object[]> getClientCountByCountry() {
+        return clientService.getClientCountByCountry();
+    }
+
+
+    //PERFETC
+    @GetMapping("/count")
+    public Long getClientCount() {
+        return clientService.getClientCount();
+    }
+
+
+
+    //PERFETC
+    @GetMapping("/count-in-city/{city}")
+    public Long getClientCountInCity(@PathVariable String city) {
+        return clientService.getClientCountInCity(city);
+    }
+
+    //PERFETC
+    @GetMapping("/count-by-city-starting-with/{letter}")
+    public List<Object[]> getClientCountByCityStartingWith(@PathVariable String letter) {
+        return clientService.getClientCountByCityStartingWith(letter);
+    }
+
+
+    //PERFETC
+    @GetMapping("/count-without-sales-representative")
+    public Long getClientCountWithoutSalesRepresentative() {
+        return clientService.getClientCountWithoutSalesRepresentative();
+    }
+
+    //PERFETC
+    @GetMapping("/first-and-last-payment-dates")
+    public List<Object[]> getFirstAndLastPaymentDatesByClient() {
+        return clientService.getFirstAndLastPaymentDatesByClient();
+    }
+
+
+    //PERFETC
+    @GetMapping("/clients-sales-representatives-office-city")
+    public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
+        return clientService.getClientsAndSalesRepresentativesWithOfficeCity();
+    }
+
+  
+
+    
+
+   
 
     
     

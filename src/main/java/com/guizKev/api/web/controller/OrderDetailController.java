@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +23,13 @@ public class OrderDetailController {
         return orderDetailService.getAllOrder() ;
     }
 
-
-      @GetMapping("/distinct-products")
+    //ERROR DEVUELVE QUERIS DE MAS
+    @GetMapping("/distinct-products")
     public List<Object[]> countDistinctProductsInEachOrder() {
         return orderDetailService.countDistinctProductsInEachOrder();
     }
 
+    //ERROR DEVUELVE QUERIS DE MAS
     @GetMapping("/total-quantity")
     public List<Object[]> sumTotalQuantityOfProductsInEachOrder() {
         return orderDetailService.sumTotalQuantityOfProductsInEachOrder();

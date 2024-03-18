@@ -21,21 +21,25 @@ public class OfficeController {
         return officeService.getAllOffice();
     }
 
+    //PERFECT
     @GetMapping("/codes")
     public List<Object[]> getAllCodesAndCities() {
         return officeService.findAllOfficeCodesAndCities();
     }
 
+    //PERFECT
     @GetMapping("/cities/{country}")
     public List<Object[]> getCitiesAndPhonesInCountry(@PathVariable String country) {
         return officeService.findCitiesAndPhonesInCountry(country);
     }
 
+    //PERFECT
     @GetMapping("/addresses/{city}")
     public List<Object[]> getOfficeAddressesWithClientsInCity(@PathVariable String city) {
         return officeService.findOfficeAddressesWithClientsInCity(city);
     }
 
+    //ARREGLAR ESTA
     /* 
     @GetMapping("/withoutReps/fruits")
     public List<Office> getOfficesWithoutSalesRepsForFruitsProducts() {

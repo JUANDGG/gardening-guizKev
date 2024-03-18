@@ -51,15 +51,18 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
         @Query("SELECT DISTINCT c.clientName FROM Client c JOIN c.order o WHERE o.deliveryDate IS NULL OR o.deliveryDate > o.expectedDate GROUP BY c.clientName")
         List<String> getClientsWithLateOrders();
               
+        //11
         /* 
-       // 11. Returns a list of the different product ranges purchased by each client.
-       @Query("SELECT p.productCode, STRING_AGG(DISTINCT pr.productRange, ', ') " +
-       "FROM Product p " +
-       "JOIN p.productRange pr " +
-       "GROUP BY p.productCode " +
-       "ORDER BY p.productCode ASC")
-      List<Object[]> getPurchasedProductRangesByClient();
-      */
+        @Query("SELECT c.firstName, pr.productRange.range " +
+        "FROM Client c " +
+        "JOIN c.orders p " +
+        "JOIN p.orderDetail dp " +
+        "JOIN dp.product pr")
+        List<Object[]> findClientAndProductRange();
+
+        */
+
+      
        
     
        // 12. Returns a list showing only clients who haven't made any payments.
