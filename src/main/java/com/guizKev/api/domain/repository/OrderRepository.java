@@ -22,15 +22,10 @@ public interface OrderRepository extends JpaRepository<Order ,Integer>{
     // 3. Retrieve a list of order code, client code, expected date, and delivery date for orders where the delivery date is at least a certain number of days before the expected date.
     @Query("SELECT o.orderCode, o.client.clientCode, o.expectedDate, o.deliveryDate FROM Order o WHERE DATEDIFF(o.deliveryDate, o.expectedDate) = :daysBefore")
     List<Object[]> findOrdersDeliveredDaysBeforeExpectedDate(@Param("daysBefore") int daysBefore);
-
-
-    //ERROR :
-    // 4. Retrieve a list of all orders that were rejected in a certain year.
-    @Query("SELECT o.orderCode, o.orderDate, o.state, o.comments FROM Order o WHERE EXTRACT(YEAR FROM o.orderDate) = :year AND o.state = 'Rejected'")
-    List<Object[]> findRejectedOrdersInYear(@Param("year") int year);
     
-    //////
-
+    // 4. Retrieve a list of all orders that were rejected in a certain year.
+    @Query("SELECT o.orderCode, o.orderDate, o.state, o.comments FROM Order o WHERE EXTRACT(YEAR FROM o.orderDate) = :year AND o.state = 'Rechazado'")
+    List<Object[]> findRejectedOrdersInYear(@Param("year") int year);
 
     // 5. Retrieve a list of all orders that have been delivered in a certain month of any year.
     @Query("SELECT o.orderCode, o.orderDate, o.deliveryDate, o.state FROM Order o WHERE MONTH(o.deliveryDate) = :month")

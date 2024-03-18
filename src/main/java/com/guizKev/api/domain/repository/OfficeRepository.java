@@ -26,21 +26,14 @@ public interface OfficeRepository  extends JpaRepository<Office ,String>{
               "WHERE c.city = :city")
        List<Object[]> findOfficeAddressesWithClientsInCity(@Param("city") String city);
 
-    /*
-    // 4: Retrieve offices without sales representatives for Fruits products.
-    @Query("SELECT DISTINCT o " +
-       "FROM Office o " +
-       "WHERE NOT EXISTS (" +
-       "    SELECT e " +
-       "    FROM Employee e " +
-       "    JOIN e.Client c " +
-       "    JOIN c.Order pd " +
-       "    JOIN pd.OrderDetail dp " +
-       "    JOIN dp.Product p " +
-       "    WHERE e.office = o AND p.productRange.name = 'Fruits')")
-List<Office> findOfficesWithoutSalesRepsForFruitsProducts();
 
-*/
+       /* 
+       // 4: Retrieve offices without sales representatives for Fruits products.
+       @Query("SELECT DISTINCT o FROM Office o LEFT JOIN o.employees e LEFT JOIN e.client c LEFT JOIN c.order pd LEFT JOIN pd.orderDetails dp LEFT JOIN dp.product p WHERE p.productLine = 'Frutales' AND e IS NULL")
+       List<Office> findOfficesWithoutSalesRepsForFruitsProducts();
+       */
+
+       
 
     
 }

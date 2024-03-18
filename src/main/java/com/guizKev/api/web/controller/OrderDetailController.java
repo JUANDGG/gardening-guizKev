@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guizKev.api.domain.service.orderDetail.OrderDetailService;
-import com.guizKev.api.persistence.entity.OrderDetail;
+
 
 @RestController
 @RequestMapping(value = "/orderDetail")
@@ -17,54 +17,42 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService  orderDetailService ;
 
-
-    @GetMapping("/all")
-    public List<OrderDetail> getAllOrder(){
-        return orderDetailService.getAllOrder() ;
-    }
-
-    //ERROR DEVUELVE QUERIS DE MAS
+    // REVISAR ESTA  ERROR DATOS INESACTOS
     @GetMapping("/distinct-products")
     public List<Object[]> countDistinctProductsInEachOrder() {
         return orderDetailService.countDistinctProductsInEachOrder();
     }
 
-    //ERROR DEVUELVE QUERIS DE MAS
+    // REVISAR ESTA  ERROR DATOS INESACTOS
     @GetMapping("/total-quantity")
     public List<Object[]> sumTotalQuantityOfProductsInEachOrder() {
         return orderDetailService.sumTotalQuantityOfProductsInEachOrder();
     }
 
-    /*
-
-    @GetMapping("/total-billing")
+    //PERFECT
+    @GetMapping("/billing")
     public Object[] calculateBilling() {
         return orderDetailService.calculateBilling();
     }
 
-    */
-
-    /* 
+    //PERFECT 147 ITEMS MORE
     @GetMapping("/billing-by-product")
     public List<Object[]> calculateBillingByProduct() {
         return orderDetailService.calculateBillingByProduct();
     }
 
-    */
-
-
-    /* 
-    
-    @GetMapping("/billing-by-product")
+    //PERFECT
+    @GetMapping("/billing-by-product-starting-with")
     public List<Object[]> calculateBillingByProductStartingWith() {
         return orderDetailService.calculateBillingByProductStartingWith();
     }
 
-    @GetMapping("/total-sales-over-3000")
+    //PERFECT 9 ITEM OF 10
+    @GetMapping("/total-sales-over-3000-euros")
     public List<Object[]> calculateTotalSalesForProductsOver3000Euros() {
         return orderDetailService.calculateTotalSalesForProductsOver3000Euros();
     }
-
-    */
-
 }
+    
+
+

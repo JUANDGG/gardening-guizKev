@@ -1,7 +1,7 @@
 package com.guizKev.api.domain.service.product;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,28 +15,30 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+ 
+
     @Override
     public List<Product> findProductsByRangeAndStock(String range, int quantity) {
         return productRepository.findProductsByRangeAndStock(range, quantity);
     }
 
     @Override
-    public List<Product> findProductsNotInOrders(Long orderId) {
-        return productRepository.findProductsNotInOrders(orderId);
+    public List<Product> findProductsWithoutOrderDetails() {
+        return productRepository.findProductsWithoutOrderDetails();
     }
 
     @Override
-    public List<Object[]> findProductsNotInOrdersWithDetails(Long orderId) {
-        return productRepository.findProductsNotInOrdersWithDetails(orderId);
+    public List<Object[]> findProductsNotInOrderDetails() {
+        return productRepository.findProductsNotInOrderDetails();
     }
 
     @Override
-    public Optional<Object[]> findMaxAndMinSalesPrice(String range) {
-        return productRepository.findMaxAndMinSalesPrice(range);
+    public Object[] findMaxAndMinPrice() {
+        return productRepository.findMaxAndMinPrice();
     }
 
     @Override
-    public List<Object[]> findTopProductsByUnitsSold(String range) {
-        return productRepository.findTopProductsByUnitsSold(range);
+    public List<Object[]> findTop20BestSellingProducts() {
+        return productRepository.findTop20BestSellingProducts();
     }
 }

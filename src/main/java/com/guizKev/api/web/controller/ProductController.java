@@ -26,32 +26,25 @@ public class ProductController {
         return productService.findProductsByRangeAndStock(range, quantity);
     }
 
-    //ESTA MAL ESTA  NO DEBE TENER PARAMETRO
-    //EXAMPLE :GET /products/notInOrders/{orderId}
-    @GetMapping("/notInOrders/{orderId}")
-    public List<Product> findProductsNotInOrders(@PathVariable Long orderId) {
-        return productService.findProductsNotInOrders(orderId);
+    ////////////NOTA ERROR MASIVO EN LAS QUERIS POR FAVOR REVISAR////////////////
+
+    @GetMapping("/notInOrders")
+    public List<Product> findProductsNotInOrders() {
+        return productService.findProductsWithoutOrderDetails();
     }
 
-    //ESTA MAL ESTA  NO DEBE TENER PARAMETRO
-    //EXAMPLE :GET /products/notInOrdersWithDetails/{orderId} 
-    @GetMapping("/notInOrdersWithDetails/{orderId}")
-    public List<Object[]> findProductsNotInOrdersWithDetails(@PathVariable Long orderId) {
-        return productService.findProductsNotInOrdersWithDetails(orderId);
+    @GetMapping("/notInOrdersWithDetails")
+    public List<Object[]> findProductsNotInOrdersWithDetails() {
+        return productService.findProductsNotInOrderDetails();
     }
 
-
-    //ESTA MAL ESTA  NO DEBE TENER PARAMETRO
-    //EXAMPLE :GET /products/maxAndMinSalesPrice?range={range}
     @GetMapping("/maxAndMinSalesPrice")
-    public Optional<Object[]> findMaxAndMinSalesPrice(@RequestParam String range) {
-        return productService.findMaxAndMinSalesPrice(range);
+    public Object[] findMaxAndMinSalesPrice(@RequestParam String range) {
+        return productService.findMaxAndMinPrice();
     }
 
-    //EXAMPLE :GET /products/topByUnitsSold?range={range}
-    //ESTA MAL ESTA  NO DEBE TENER PARAMETRO
     @GetMapping("/topByUnitsSold")
     public List<Object[]> findTopProductsByUnitsSold(@RequestParam String range) {
-        return productService.findTopProductsByUnitsSold(range);
+        return productService.findTop20BestSellingProducts();
     }
 }

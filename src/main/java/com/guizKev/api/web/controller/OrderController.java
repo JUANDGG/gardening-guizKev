@@ -44,7 +44,7 @@ public class OrderController {
     }
 
 
-    //ERROR QUERY NO DEVUELVE NADA
+    //PERFECT
     @GetMapping("/rejected-in-year/{year}")
     public List<Object[]> findRejectedOrdersInYear(@PathVariable int year) {
         return orderService.findRejectedOrdersInYear(year);
