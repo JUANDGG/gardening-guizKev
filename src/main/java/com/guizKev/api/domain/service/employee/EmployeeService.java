@@ -2,6 +2,7 @@ package com.guizKev.api.domain.service.employee;
 
 import java.util.List;
 
+import com.guizKev.api.persistence.entity.Client;
 import com.guizKev.api.persistence.entity.Employee;
 
 public interface EmployeeService {
@@ -10,7 +11,7 @@ public interface EmployeeService {
 
     List<Object[]> findEmployeesByManagerCode(Long managerCode);
 
-    Object findCompanyManager();
+    List<Employee> findCompanyManager();
 
     List<Object[]> findNonSalesRepresentatives(String position);
 
@@ -30,5 +31,5 @@ public interface EmployeeService {
 
     Long countEmployees();
 
-    //List<Object[]> findSalesRepresentativesAndTheirClients();
+    List<Object[]> findSalesRepresentativesAndTheirClients();
 }

@@ -6,64 +6,66 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import com.guizKev.api.persistence.entity.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-     // 1. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7.
+     // 1. Returns a list with the first name, last name and email of the employees whose boss has a boss code equal to 7.
      @Query("SELECT e.firstName, e.lastName1, e.lastName2, e.email FROM Employee e WHERE e.manager.employeeCode = :managerCode")
      List<Object[]> findEmployeesByManagerCode(@Param("managerCode") Long managerCode);
 
 
-     // 2. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa.
-     @Query("SELECT e.position AS jobName, m.firstName, m.lastName1, m.lastName2, m.email FROM Employee e JOIN e.manager m WHERE e.manager IS NULL")
-     Object findCompanyManager();
+     // 2. Returns the name of the position, first name, last name and email of the company manager.
+     @Query("SELECT e FROM Employee e WHERE e.manager IS NULL")
+     List<Employee> findCompanyManager();
 
-     // 3. Devuelve un listado con el nombre, apellidos y puesto de aquellos empleados que no sean representantes de ventas.
+     // 3. Returns a list with the first name, last name and position of those employees who are not sales representatives.
      @Query("SELECT e.firstName, e.lastName1, e.lastName2, e.position FROM Employee e WHERE e.position IS NOT NULL AND e.position <> :position")
      List<Object[]> findNonSalesRepresentatives(@Param("position") String position);
 
 
-     // 4. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+     // 4. Returns a list with the name of the employees along with the name of their managers.
      @Query("SELECT e1.firstName AS employeeName, e2.firstName AS managerName FROM Employee e1 LEFT JOIN e1.manager e2")
      List<Object[]> findEmployeesWithManagers();
 
-     // 5. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+     // 5.  Returns a list showing the name of each employee, the name of their manager and the name of their manager's manager.
      @Query("SELECT e1.firstName AS employeeName, e2.firstName AS managerName, e3.firstName AS managerOfManagerName FROM Employee e1 LEFT JOIN e1.manager e2 LEFT JOIN e2.manager e3")
      List<Object[]> findEmployeesWithManagersAndManagerOfManagers();
 
      
-     // 6. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
+     // 6. Returns a list showing only employees who do not have an associated office.
      @Query("SELECT e FROM Employee e LEFT JOIN e.office o WHERE o.officeCode IS NULL")
      List<Employee> findEmployeesWithoutOffice();
 
-     // 7. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
+     // 7. Returns a list that shows only employees that do not have an associated customer.
      @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c IS NULL")
      List<Object[]> findEmployeesWithoutClient();
 
-     // 8. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
+     // 8.  Returns a list showing only those employees who do not have an associated customer along with the office data where they work..
      @Query("SELECT e, o FROM Employee e JOIN e.office o LEFT JOIN e.client c WHERE c IS NULL")
      List<Object[]> findEmployeesWithoutClientAndTheirOffice();
 
-     // 9. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
+     // 9. Returns a list showing employees who do not have an associated office and those who do not have an associated customer.
      @Query("SELECT e FROM Employee e LEFT JOIN e.office o LEFT JOIN e.client c WHERE o.officeCode IS NULL AND c IS NULL")
      List<Employee> findEmployeesWithoutOfficeAndClient();
 
-     // 10. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado.
+     // 10. Returns a list with the data of the employees who have no associated customers and the name of their associated manager.
      @Query("SELECT e, m.firstName AS managerName FROM Employee e LEFT JOIN e.client c LEFT JOIN e.manager m WHERE c IS NULL")
      List<Object[]> findEmployeesWithoutClientAndTheirManager();
 
 
 
-     // 11. ¿Cuántos empleados hay en la compañía?
+     // 11  How many employees are there in the company
      @Query("SELECT COUNT(e) FROM Employee e")
      Long countEmployees();
 
-     /* 
-     // 12. Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno.
-     @Query("SELECT e.firstName, e.lastName1, e.lastName2, COUNT(c) AS totalClients FROM Employee e LEFT JOIN e.clients c WHERE e.position = 'Sales Representative' GROUP BY e.employeeCode")
-     List<Object[]> findSalesRepresentativesAndTheirClients();
-     }
-     */
+     //12   Returns the name of the sales representatives and the number of customers served by each one.
+     @Query("SELECT e.firstName, e.lastName1, e.lastName2, COUNT(c) AS totalClients " +
+            "FROM Employee e " +
+            "LEFT JOIN e.client c " +
+            "WHERE LOWER(TRIM(e.position)) = 'representante ventas' " +
+            "GROUP BY e.firstName, e.lastName1, e.lastName2")
+    List<Object[]> findSalesRepresentativesAndTheirClients();
+
+     
 }

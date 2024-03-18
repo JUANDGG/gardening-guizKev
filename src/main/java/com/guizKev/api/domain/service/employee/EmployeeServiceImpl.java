@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.guizKev.api.domain.repository.EmployeeRepository;
+import com.guizKev.api.persistence.entity.Client;
 import com.guizKev.api.persistence.entity.Employee;
 
 @Service
@@ -25,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Object findCompanyManager() {
+    public List<Employee> findCompanyManager() {
         return employeeRepository.findCompanyManager();
     }
 
@@ -74,12 +75,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.countEmployees();
     }
 
-    /* 
+
 
     @Override
     public List<Object[]> findSalesRepresentativesAndTheirClients() {
         return employeeRepository.findSalesRepresentativesAndTheirClients();
     }
 
-    */
+
 }

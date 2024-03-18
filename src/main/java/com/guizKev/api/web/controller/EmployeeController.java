@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.guizKev.api.domain.service.employee.EmployeeService;
 import com.guizKev.api.persistence.entity.Employee;
 
@@ -30,13 +29,15 @@ public class EmployeeController {
         return employeeService.findEmployeesByManagerCode(managerCode);
     }
     
-    //MYSQL QUERY EMPTY
+    //PERFECT
     @GetMapping("/company/manager")
-    public Object findCompanyManager() {
+    public List<Employee>
+     findCompanyManager() {
         return employeeService.findCompanyManager();
-    }
+    }   
 
-    //ERROR STATUS 400 CORREGIR
+    //PERFECT
+    //EXAMPLE :http://localhost:8080/api/employee/non-sales-representatives?position=manager
     @GetMapping("/non-sales-representatives")
     public List<Object[]> findNonSalesRepresentatives(@RequestParam String position) {
         return employeeService.findNonSalesRepresentatives(position);
@@ -44,7 +45,6 @@ public class EmployeeController {
 
 
     //PERFECT
-
     @GetMapping("/with-managers")
     public List<Object[]> findEmployeesWithManagers() {
         return employeeService.findEmployeesWithManagers();
@@ -93,12 +93,12 @@ public class EmployeeController {
         return employeeService.countEmployees();
     }
 
-    /* 
 
+    //PERFECT
     @GetMapping("/sales-representatives")
     public List<Object[]> findSalesRepresentativesAndTheirClients() {
         return employeeService.findSalesRepresentativesAndTheirClients();
     }
 
-    */
+    
 }
