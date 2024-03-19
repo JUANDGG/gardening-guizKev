@@ -27,18 +27,18 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductsWithoutOrderDetails();
     }
 
-    @Override
-    public List<Object[]> findProductsNotInOrderDetails() {
-        return productRepository.findProductsNotInOrderDetails();
-    }
+    // @Override
+    // public List<Object[]> findProductsNotInOrderDetails() {
+    //     return productRepository.findProductsNotInOrderDetails();
+    // }
 
-    @Override
-    public Object[] findMaxAndMinPrice() {
-        return productRepository.findMaxAndMinPrice();
-    }
+    // @Override
+    // public Object[] findMaxAndMinPrice() {
+    //     return productRepository.findMaxAndMinPrice();
+    // }
 
-    @Override
-    public List<Object[]> findTop20BestSellingProducts() {
-        return productRepository.findTop20BestSellingProducts();
-    }
+    // @Override
+    // public List<Object[]> findTop20BestSellingProducts() {
+    //     return productRepository.findTop20BestSellingProducts();
+    // }
 }

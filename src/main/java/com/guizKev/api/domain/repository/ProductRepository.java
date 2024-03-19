@@ -24,25 +24,25 @@ public interface ProductRepository extends JpaRepository<Product ,String>{
     List<Product> findProductsWithoutOrderDetails();
 
 
-    //3 -Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto. 
+    // //3 -Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto. 
     
-    @Query("SELECT p.nombre, p.descripcion, gp.imagen " +
-    "FROM Product p " +
-    "JOIN ProductLine gp ON p.productLine = gp.productLine " +
-    "WHERE p.id NOT IN (SELECT DISTINCT od.product.id FROM OrderDetail od)")
-    List<Object[]> findProductsNotInOrderDetails();
+    // @Query("SELECT p.nombre, p.descripcion, gp.imagen " +
+    // "FROM Product p " +
+    // "JOIN ProductLine gp ON p.productLine = gp.productLine " +
+    // "WHERE p.id NOT IN (SELECT DISTINCT od.product.id FROM OrderDetail od)")
+    // List<Object[]> findProductsNotInOrderDetails();
 
-    //4 -Calcula el precio de venta del producto más caro y más barato en una misma consulta.
+    // //4 -Calcula el precio de venta del producto más caro y más barato en una misma consulta.
    
-    @Query("SELECT MAX(p.precioVenta) AS precio_mas_caro, MIN(p.precioVenta) AS precio_mas_barato FROM Product p")
-    Object[] findMaxAndMinPrice();
+    // @Query("SELECT MAX(p.precioVenta) AS precio_mas_caro, MIN(p.precioVenta) AS precio_mas_barato FROM Product p")
+    // Object[] findMaxAndMinPrice();
 
 
-    //5 -Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.
-    @Query("SELECT p.codigoProducto, p.nombre, SUM(dp.quantity) AS totalUnidadesVendidas " +
-    "FROM Product p " +
-    "JOIN OrderDetail dp ON p.codigoProducto = dp.product.codigoProducto " +
-    "GROUP BY p.codigoProducto, p.nombre " +
-    "ORDER BY totalUnidadesVendidas DESC")
-List<Object[]> findTop20BestSellingProducts();
+    // //5 -Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.
+    // @Query("SELECT p.codigoProducto, p.nombre, SUM(dp.quantity) AS totalUnidadesVendidas " +
+    // "FROM Product p " +
+    // "JOIN OrderDetail dp ON p.codigoProducto = dp.product.codigoProducto " +
+    // "GROUP BY p.codigoProducto, p.nombre " +
+    // "ORDER BY totalUnidadesVendidas DESC")
+    // List<Object[]> findTop20BestSellingProducts();
 } 

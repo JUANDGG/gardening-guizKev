@@ -33,18 +33,18 @@ public class ProductController {
         return productService.findProductsWithoutOrderDetails();
     }
 
-    @GetMapping("/notInOrdersWithDetails")
-    public List<Object[]> findProductsNotInOrdersWithDetails() {
-        return productService.findProductsNotInOrderDetails();
-    }
+    // @GetMapping("/notInOrdersWithDetails")
+    // public List<Object[]> findProductsNotInOrdersWithDetails() {
+    //     return productService.findProductsNotInOrderDetails();
+    // }
 
-    @GetMapping("/maxAndMinSalesPrice")
-    public Object[] findMaxAndMinSalesPrice(@RequestParam String range) {
-        return productService.findMaxAndMinPrice();
-    }
+    // @GetMapping("/maxAndMinSalesPrice")
+    // public Object[] findMaxAndMinSalesPrice(@RequestParam String range) {
+    //     return productService.findMaxAndMinPrice();
+    // }
 
-    @GetMapping("/topByUnitsSold")
-    public List<Object[]> findTopProductsByUnitsSold(@RequestParam String range) {
-        return productService.findTop20BestSellingProducts();
-    }
+    // @GetMapping("/topByUnitsSold")
+    // public List<Object[]> findTopProductsByUnitsSold(@RequestParam String range) {
+    //     return productService.findTop20BestSellingProducts();
+    // }
 }
