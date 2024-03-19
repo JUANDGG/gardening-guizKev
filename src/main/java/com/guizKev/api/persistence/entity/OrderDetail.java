@@ -1,9 +1,5 @@
 package com.guizKev.api.persistence.entity;
-
-
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,8 +12,6 @@ import lombok.*;
 
 
 
-// FALTA ESTA ENTIDAD
-
 @Entity
 @Getter @Setter @NoArgsConstructor
 @IdClass(OrderDetailId.class)
@@ -26,13 +20,13 @@ import lombok.*;
 public class OrderDetail {
     @Id
     @ManyToOne
-    @JsonBackReference 
+    @JsonManagedReference
     @JoinColumn(name = "codigo_pedido")
     private Order order ;
     
     @Id
     @ManyToOne
-    @JsonBackReference 
+    @JsonManagedReference
     @JoinColumn(name = "codigo_producto")
     private Product product;
 
@@ -43,7 +37,7 @@ public class OrderDetail {
     @Column(name = "precio_unidad",nullable = false,columnDefinition = "NUMERIC(15,2)")
     private int unitPrice ;
 
-    @Column(name = "numero_linea ",nullable = false,columnDefinition = "SMALLINT ")
+    @Column(name = "numero_linea ",nullable = false,columnDefinition = "SMALLINT")
     private  int lineNumber  ;
     
 }

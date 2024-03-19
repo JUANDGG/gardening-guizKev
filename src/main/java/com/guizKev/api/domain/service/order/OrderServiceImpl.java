@@ -20,4 +20,33 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findAll();
     }
     
+    @Override
+    public List<String> findDistinctOrderStates() {
+        return orderRepository.findDistinctOrderStates();
+    }
+
+    @Override
+    public List<Object[]> findOrdersNotDeliveredOnTime() {
+        return orderRepository.findOrdersNotDeliveredOnTime();
+    }
+
+    @Override
+    public List<Object[]> findOrdersDeliveredDaysBeforeExpectedDate(int daysBefore) {
+        return orderRepository.findOrdersDeliveredDaysBeforeExpectedDate(daysBefore);
+    }
+
+    @Override
+    public List<Object[]> findRejectedOrdersInYear(int year) {
+        return orderRepository.findRejectedOrdersInYear(year);
+    }
+
+    @Override
+    public List<Object[]> findOrdersDeliveredInMonth(int month) {
+        return orderRepository.findOrdersDeliveredInMonth(month);
+    }
+
+    @Override
+    public List<Object[]> countOrdersByState() {
+        return orderRepository.countOrdersByState();
+    }
 }

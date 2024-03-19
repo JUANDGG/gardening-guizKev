@@ -47,12 +47,12 @@ public class Employee {
     @JoinColumn(name = "codigo_oficina", nullable = false)
     private Office office;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "codigo_jefe", referencedColumnName = "codigo_empleado")
     private Employee manager;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Client> client;
 

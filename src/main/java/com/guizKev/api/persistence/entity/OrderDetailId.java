@@ -4,7 +4,5 @@ import java.io.Serializable;
 
 public class OrderDetailId implements Serializable {
     private int order;
-    private String product;
-
-    // getters, setters, equals, hashCode
+    private String product;   
 }

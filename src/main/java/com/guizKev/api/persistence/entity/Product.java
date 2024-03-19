@@ -1,4 +1,4 @@
-package com.guizKev.api.persistence.entity;
+ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class Product {
     @JoinColumn(name = "gama")
     private  ProductRange productRange ;
 
-    @Column(name = "dimenciones  ",nullable = true,columnDefinition = "VARCHAR(25)")
+    @Column(name = "dimensiones",nullable = true,columnDefinition = "VARCHAR(25)")
     private String dimensions ;
 
     @Column(name = "proveedor", nullable = true, columnDefinition = "VARCHAR(50) DEFAULT NULL")
