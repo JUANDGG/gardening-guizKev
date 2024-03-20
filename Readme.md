@@ -1273,7 +1273,7 @@ The project will utilize the following technologies:
 ## Class Diagram
 [Link Class Diagram](https://drive.google.com/file/d/1BhnQA5zl94FS9KlvVA2zUUOgZXkZM_Uv/view?usp=sharing)
 
-![Class Diagram]() 
+
 
 ## Security
 ![Create the Web Token](/imagesDocumentation/PostUserPassWebToken.png)
