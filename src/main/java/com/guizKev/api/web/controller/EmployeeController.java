@@ -37,7 +37,7 @@ public class EmployeeController {
     }   
 
     //PERFECT
-    //EXAMPLE :http://localhost:8080/api/employee/non-sales-representatives?position=manager
+    //EXAMPLE :http://localhost:8080/api/employee/non-sales-representatives?position=Representante Ventas
     @GetMapping("/non-sales-representatives")
     public List<Object[]> findNonSalesRepresentatives(@RequestParam String position) {
         return employeeService.findNonSalesRepresentatives(position);

@@ -2,7 +2,8 @@ package com.guizKev.api.persistence.entity;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference; 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -62,14 +63,17 @@ public class Client {
     @Column(name = "limite_credito", nullable = true ,columnDefinition="NUMERIC(15,2) DEFAULT NULL")
     private Double creditLimit;
 
+    @JsonIgnore
     @JsonManagedReference 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Payment> payment;
-
+    
+    @JsonIgnore
     @JsonManagedReference 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Order> order;
 
+    
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "codigo_empleado_rep_ventas",referencedColumnName = "codigo_empleado")

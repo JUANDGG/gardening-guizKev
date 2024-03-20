@@ -13,7 +13,7 @@ import com.guizKev.api.domain.service.order.OrderService;
 import com.guizKev.api.persistence.entity.Order;
 
 @RestController
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/order")
 public class OrderController {
 
     @Autowired 
