@@ -1,4 +1,4 @@
-package com.guizKev.api.segurity.authController;
+package com.guizKev.api.util.login;
 
 import lombok.*;
 

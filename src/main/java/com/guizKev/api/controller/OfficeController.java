@@ -1,4 +1,4 @@
-package com.guizKev.api.web.controller;
+package com.guizKev.api.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

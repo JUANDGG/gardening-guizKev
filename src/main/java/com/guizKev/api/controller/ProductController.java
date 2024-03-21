@@ -1,4 +1,4 @@
-package com.guizKev.api.web.controller;
+package com.guizKev.api.controller;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.guizKev.api.web.controller;
+package com.guizKev.api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import com.guizKev.api.domain.service.client.ClientService;
 import com.guizKev.api.persistence.entity.Client;

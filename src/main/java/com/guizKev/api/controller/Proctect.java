@@ -1,4 +1,4 @@
-package com.guizKev.api.segurity.authController;
+package com.guizKev.api.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/v1")
 @RequiredArgsConstructor
-public class ProtectController {
+public class Proctect {
     @PostMapping(value = "demo")
     public String demo() {
         return "intento de acceder a ruta protegida" ;

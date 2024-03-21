@@ -2,7 +2,7 @@ package com.guizKev.api.persistence.entity;
 
 
 
-import java.io.Serial;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -20,18 +20,19 @@ import lombok.*;
 
 @Entity
 @Table(name = "usuario")
-
 @Builder
 public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
+
     @Column(name = "nombre_usuario",columnDefinition = "varchar(10) not null")
     @Setter
     private String userName ;
-    @Column(name = "contrasenaHash")
+
+    @Column(name = "contrasena_hash")
     @Setter
-    private String passwordHash ;
+    private String password ;
 
 
     @Override
@@ -41,9 +42,10 @@ public class User implements UserDetails{
     }
     @Override
     public String getPassword() {
-        return this.passwordHash ;
+        return this.password ;
     }
     @Override
+    @NonNull
     public String getUsername() {
         return this.userName ;
     }
