@@ -3,7 +3,7 @@ package com.guizKev.api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.guizKev.api.domain.service.auth.AuthService;
+import com.guizKev.api.domain.service.auth.AuthServiceImpl;
 import com.guizKev.api.util.auth.AuthResponse;
 import com.guizKev.api.util.login.BodyRequest;
 
@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping(value = "/auth")
 public class AuthController {
 
-
     @Autowired
-    private  AuthService authService;
+    private  AuthServiceImpl authService;
 
     
      @PostMapping(value = "/login")

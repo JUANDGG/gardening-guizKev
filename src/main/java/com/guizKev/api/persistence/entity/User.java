@@ -15,7 +15,11 @@ import lombok.*;
 @Table(name = "usuario")
 @Builder
 @Getter @Setter
+@AllArgsConstructor 
+@NoArgsConstructor     
 public class User implements UserDetails {
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
