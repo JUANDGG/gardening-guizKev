@@ -5,20 +5,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.guizKev.api.domain.service.auth.AuthService;
 import com.guizKev.api.util.auth.AuthResponse;
-import com.guizKev.api.util.login.LoginRequest;
+import com.guizKev.api.util.login.BodyRequest;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+
+import lombok.*;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/auth")
-@Data
-@RequiredArgsConstructor
+@Getter @Setter
+@RequestMapping(value = "/auth")
 public class AuthController {
 
 
@@ -26,14 +26,14 @@ public class AuthController {
     private  AuthService authService;
 
     
-     @PostMapping("/login")
-     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-         return ResponseEntity.ok(authService.login(request)); //
+     @PostMapping(value = "/login")
+     public ResponseEntity<AuthResponse> login(@RequestBody BodyRequest bodyRequest) {
+         return ResponseEntity.ok(authService.login(bodyRequest)); 
      }
      
-     @PostMapping("/register")
-     public ResponseEntity<AuthResponse> register(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.register(request));
+     @PostMapping(value = "/register")
+     public ResponseEntity<AuthResponse> register(@RequestBody BodyRequest bodyRequest) {
+        return ResponseEntity.ok(authService.register(bodyRequest));
     
      }
      

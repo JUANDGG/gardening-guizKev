@@ -1,6 +1,4 @@
 package com.guizKev.api.config;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,18 +16,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AplicationConfig {
 
-    
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
 
     @Bean
-    public AuthenticationManager autenticationManager (AuthenticationConfiguration config )throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
     @Bean
-    public  AuthenticationProvider authenticationProvider (){
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider() ;
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsServiceImpl());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
@@ -37,12 +33,12 @@ public class AplicationConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-       return  new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public UserDetailsService userDetailsServiceImpl() {
-      return userName -> userRepository.findByUserName(userName)
-      .orElseThrow(()-> new UsernameNotFoundException("USER NOT FOUND"));
+        return userName -> userRepository.findByUserName(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("USER NOT FOUND"));
     }
 }
