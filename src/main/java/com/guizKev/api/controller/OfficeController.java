@@ -9,15 +9,20 @@ import com.guizKev.api.exeptions.NotFoundEndPoint;
 import com.guizKev.api.persistence.entity.Office;
 import com.guizKev.api.persistence.entity.ProductRange;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping(value = "/office")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class OfficeController {
     
     @Autowired
