@@ -1,10 +1,17 @@
 package com.guizKev.api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import com.guizKev.api.domain.service.client.ClientService;
+import com.guizKev.api.exeptions.DifferentDataTypeException;
+import com.guizKev.api.exeptions.ErrorResponses;
+import com.guizKev.api.exeptions.InvalidIdFormatException;
+import com.guizKev.api.exeptions.NotFoundEndPoint;
 import com.guizKev.api.persistence.entity.Client;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -165,6 +172,28 @@ public class ClientController {
     public List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity() {
         return clientService.getClientsAndSalesRepresentativesWithOfficeCity();
     }
+
+    // Exception handling for different data type
+    @ExceptionHandler(DifferentDataTypeException.class)
+    public ResponseEntity<Object> handleDifferentDataTypeException(DifferentDataTypeException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Different data type error", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    // Exception handling for invalid ID format
+    @ExceptionHandler(InvalidIdFormatException.class)
+    public ResponseEntity<Object> handleInvalidIdFormatException(InvalidIdFormatException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Invalid ID format", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    // Exception handling for endpoint not found
+    @ExceptionHandler(NotFoundEndPoint.class)
+    public ResponseEntity<Object> handleNotFoundEndPoint(NotFoundEndPoint ex) {
+        ErrorResponses errorResponse = new ErrorResponses("The requested endpoint is not defined in the API", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
 
   
 
