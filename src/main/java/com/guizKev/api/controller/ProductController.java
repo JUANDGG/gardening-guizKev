@@ -59,11 +59,4 @@ public class ProductController {
         return productService.findTop20BestSellingProducts();
     }
 
-    // Exception handling for endpoint not found
-    @ExceptionHandler(NotFoundEndPoint.class)
-    public ResponseEntity<Object> handleNotFoundEndPoint(NotFoundEndPoint ex) {
-        ErrorResponses errorResponse = new ErrorResponses("The requested endpoint is not defined in the API", ex.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
 }
