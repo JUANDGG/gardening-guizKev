@@ -5,7 +5,9 @@ package com.guizKev.api.domain.service.auth;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +17,23 @@ import com.guizKev.api.persistence.entity.User;
 import com.guizKev.api.util.auth.AuthResponse;
 import com.guizKev.api.util.login.BodyRequest;
 
+import lombok.RequiredArgsConstructor;
 
 
 
 @Service
-
+@RequiredArgsConstructor
 public class AuthServiceImpl  implements  AuthService{
-
-    @Autowired    
-    private  UserRepository userRepository;
-    @Autowired
-    private  JwtService jwtService;
-    @Autowired
-    private  PasswordEncoder passwordEncoder; 
-
+    
+    
+    private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
  
     @Override
     public AuthResponse login(BodyRequest bodyRequest) {
+        /* 
         // Buscar el usuario por nombre de usuario en la base de datos
         Optional<User> userOptional = userRepository.findByUserName(bodyRequest.getUserName());
     
@@ -53,6 +55,14 @@ public class AuthServiceImpl  implements  AuthService{
         // Si el usuario existe y la contraseña coincide, generar y retornar el token JWT
         return AuthResponse.builder()
             .token(jwtService.getToken(user))
+            .build();
+
+            */
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(bodyRequest.getUserName(), bodyRequest.getPassword()));
+        UserDetails user=userRepository.findByUserName(bodyRequest.getUserName()).orElseThrow();
+        String token=jwtService.getToken(user);
+        return AuthResponse.builder()
+            .token(token)
             .build();
     }
     
