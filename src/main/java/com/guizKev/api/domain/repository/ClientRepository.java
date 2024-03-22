@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.guizKev.api.persistence.entity.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client , Integer>{
-
+      
        // 1. Retrieves a list with the names of all Spanish clients.
        @Query("SELECT c.clientName FROM Client c WHERE c.country = :country")
        List<String> clientFromCountry(@Param("country") String country);
@@ -52,19 +52,18 @@ public interface ClientRepository extends JpaRepository<Client , Integer>{
         @Query("SELECT DISTINCT c.clientName FROM Client c JOIN c.order o WHERE o.deliveryDate IS NULL OR o.deliveryDate > o.expectedDate GROUP BY c.clientName")
         List<String> getClientsWithLateOrders();
               
-        //11
-        /* 
-        @Query("SELECT c.firstName, pr.productRange.range " +
+        //11    
+         
+        @Query("SELECT DISTINCT c.clientName, pr.productRange.range " +
         "FROM Client c " +
-        "JOIN c.orders p " +
+        "JOIN c.order p " +
         "JOIN p.orderDetail dp " +
         "JOIN dp.product pr")
         List<Object[]> findClientAndProductRange();
 
-        */
+        
 
-      
-       
+
     
        // 12. Returns a list showing only clients who haven't made any payments.
        @Query("SELECT c FROM Client c LEFT JOIN c.payment p WHERE p.client.clientCode IS NULL")

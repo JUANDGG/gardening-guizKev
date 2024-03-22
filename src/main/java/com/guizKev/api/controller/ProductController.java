@@ -13,7 +13,7 @@ import com.guizKev.api.domain.service.product.ProductService;
 import com.guizKev.api.persistence.entity.Product;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -25,25 +25,34 @@ public class ProductController {
         return productService.findProductsByRangeAndStock(range, quantity);
     }
 
-    ////////////NOTA ERROR MASIVO EN LAS QUERIS POR FAVOR REVISAR////////////////
+    
 
     @GetMapping("/notInOrders")
     public List<Product> findProductsNotInOrders() {
         return productService.findProductsWithoutOrderDetails();
     }
 
-    // @GetMapping("/notInOrdersWithDetails")
-    // public List<Object[]> findProductsNotInOrdersWithDetails() {
-    //     return productService.findProductsNotInOrderDetails();
-    // }
+    
+    //Perfect
+    @GetMapping("/notInOrdersWithDetails")
+    public List<Object[]> findProductsNotInOrdersWithDetails() {
+        return productService.findProductsNotInOrderDetails();
+    }
 
-    // @GetMapping("/maxAndMinSalesPrice")
-    // public Object[] findMaxAndMinSalesPrice(@RequestParam String range) {
-    //     return productService.findMaxAndMinPrice();
-    // }
 
-    // @GetMapping("/topByUnitsSold")
-    // public List<Object[]> findTopProductsByUnitsSold(@RequestParam String range) {
-    //     return productService.findTop20BestSellingProducts();
-    // }
+    //Perfect
+    @GetMapping("/maxAndMinSalesPrice")
+    public Object[] findMaxAndMinSalesPrice() {
+        return productService.findMaxAndMinPrice();
+    }
+
+
+    //Perfect, I just need a method with the first 20 datas
+    //@RequestParam String range
+    @GetMapping("/topByUnitsSold")
+    public List<Object[]> findTopProductsByUnitsSold() {
+        return productService.findTop20BestSellingProducts();
+    }
+
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.guizKev.api.domain.repository.OfficeRepository;
 import com.guizKev.api.persistence.entity.Office;
+import com.guizKev.api.persistence.entity.ProductRange;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -35,11 +36,11 @@ public class OfficeServiceImpl implements OfficeService {
         return officeRepository.findOfficeAddressesWithClientsInCity(city);
     }
 
-    /* 
     @Override
-    public List<Office> findOfficesWithoutSalesRepsForFruitsProducts() {
-        return officeRepository.findOfficesWithoutSalesRepsForFruitsProducts();
+    public List<Office> findOfficesWithoutSalesRepsForFruitsProducts(ProductRange range) {
+        return officeRepository.findOfficesWithoutSalesRepsForFruitsProducts(range);
     }
-    */
+    
+    
 
 }

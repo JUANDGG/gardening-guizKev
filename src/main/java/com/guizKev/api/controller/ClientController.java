@@ -81,14 +81,12 @@ public class ClientController {
         return clientService.getClientsWithLateOrders();
     }
 
-    // error 10 
-      /* 
+
+    //PERFET 10
     @GetMapping("/purchased-product-ranges")
     public List<Object[]> getPurchasedProductRangesByClient() {
-        return clientService.getPurchasedProductRangesByClient();
+        return clientService.findClientAndProductRange();
     }
-
-    */
 
     //PERFECT 11
     @GetMapping("/no-payments")

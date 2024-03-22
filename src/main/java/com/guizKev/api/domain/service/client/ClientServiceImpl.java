@@ -122,13 +122,13 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.getFirstAndLastPaymentDatesByClient();
     }
 
-    /* 
+   
     @Override
-    public List<Object[]> getPurchasedProductRangesByClient() {
-        return clientRepository.getPurchasedProductRangesByClient();
+    public List<Object[]> findClientAndProductRange() {
+        return clientRepository.findClientAndProductRange();
     }
 
-    */
+    
 
 
     

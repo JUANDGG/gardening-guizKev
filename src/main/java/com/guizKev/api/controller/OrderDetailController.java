@@ -17,13 +17,15 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService  orderDetailService ;
 
-    // REVISAR ESTA  ERROR DATOS INESACTOS
+    
+    // PERFECT
     @GetMapping("/distinct-products")
     public List<Object[]> countDistinctProductsInEachOrder() {
         return orderDetailService.countDistinctProductsInEachOrder();
     }
+    
 
-    // REVISAR ESTA  ERROR DATOS INESACTOS
+    //PERFECT
     @GetMapping("/total-quantity")
     public List<Object[]> sumTotalQuantityOfProductsInEachOrder() {
         return orderDetailService.sumTotalQuantityOfProductsInEachOrder();

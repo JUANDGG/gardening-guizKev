@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.guizKev.api.persistence.entity.Office;
+import com.guizKev.api.persistence.entity.ProductRange;
 @Repository
 public interface OfficeRepository  extends JpaRepository<Office ,String>{
        // 1: Get office codes and cities for all offices.
@@ -27,13 +28,9 @@ public interface OfficeRepository  extends JpaRepository<Office ,String>{
        List<Object[]> findOfficeAddressesWithClientsInCity(@Param("city") String city);
 
 
-       /* 
-       // 4: Retrieve offices without sales representatives for Fruits products.
-       @Query("SELECT DISTINCT o FROM Office o LEFT JOIN o.employees e LEFT JOIN e.client c LEFT JOIN c.order pd LEFT JOIN pd.orderDetails dp LEFT JOIN dp.product p WHERE p.productLine = 'Frutales' AND e IS NULL")
-       List<Office> findOfficesWithoutSalesRepsForFruitsProducts();
-       */
-
-       
-
+        
+       // 4: Retrieve offices without sales representatives for Fruits products.    //'Frutales'
+       @Query("SELECT DISTINCT o FROM Office o LEFT JOIN o.employee e LEFT JOIN e.client c LEFT JOIN c.order pd LEFT JOIN pd.orderDetail dp LEFT JOIN dp.product p WHERE e IS NULL AND p.productRange = :range")
+       List<Office> findOfficesWithoutSalesRepsForFruitsProducts(@Param("range") ProductRange range);
     
 }

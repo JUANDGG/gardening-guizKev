@@ -21,10 +21,7 @@ public interface ClientService {
     List<Object[]> getClientsWithoutPaymentsAndRepresentativeOfficeCity();
     List<Object[]> getClientsAndSalesRepresentativesWithOfficeCity();
     List<String> getClientsWithLateOrders();
-
-    
-   // List<Object[]> getPurchasedProductRangesByClient();
-
+   List<Object[]> findClientAndProductRange();  
     List<Client> getClientsWithoutPayments();
     List<Client> getClientsWithoutOrders();
     List<Client> getClientsWithoutPaymentsAndOrders();

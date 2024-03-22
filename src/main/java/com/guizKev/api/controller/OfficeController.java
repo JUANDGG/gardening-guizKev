@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.guizKev.api.domain.service.office.OfficeService;
 import com.guizKev.api.persistence.entity.Office;
+import com.guizKev.api.persistence.entity.ProductRange;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,12 +41,12 @@ public class OfficeController {
         return officeService.findOfficeAddressesWithClientsInCity(city);
     }
 
-    //ARREGLAR ESTA
-    /* 
-    @GetMapping("/withoutReps/fruits")
-    public List<Office> getOfficesWithoutSalesRepsForFruitsProducts() {
-        return officeService.findOfficesWithoutSalesRepsForFruitsProducts();
+    
+    //PERFECT
+    //EXAMPLE :http://localhost:8080/api/office/withoutReps/Frutales
+    @GetMapping("/withoutReps/{range}")
+    public List<Office> getOfficesWithoutSalesRepsForFruitsProducts(@PathVariable ProductRange range) {
+        return officeService.findOfficesWithoutSalesRepsForFruitsProducts(range);
     }
-    */
     
 }
