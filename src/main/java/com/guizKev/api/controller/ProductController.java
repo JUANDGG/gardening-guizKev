@@ -19,14 +19,14 @@ public class ProductController {
     private ProductService productService;
 
     //PERFECT
-    //EXAMPLE :GET /products/byRangeAndStock?range={range}&quantity={quantity}
+    //EXAMPLE :GET /products/byRangeAndStock?range=ornamentales&quantity=100
     @GetMapping("/byRangeAndStock")
     public List<Product> findProductsByRangeAndStock(@RequestParam String range, @RequestParam int quantity) {
         return productService.findProductsByRangeAndStock(range, quantity);
     }
 
     
-
+    //PERFECT
     @GetMapping("/notInOrders")
     public List<Product> findProductsNotInOrders() {
         return productService.findProductsWithoutOrderDetails();

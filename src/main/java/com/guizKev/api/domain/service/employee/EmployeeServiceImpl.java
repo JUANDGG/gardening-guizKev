@@ -26,8 +26,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findCompanyManager() {
-        return employeeRepository.findCompanyManager();
+    public List<Object[]> findEmployeesWithoutManager() {
+        return employeeRepository.findEmployeesWithoutManager();
     }
 
     @Override

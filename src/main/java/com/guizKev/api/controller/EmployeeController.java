@@ -29,11 +29,11 @@ public class EmployeeController {
         return employeeService.findEmployeesByManagerCode(managerCode);
     }
     
-    //PERFECT
+    //ERROR
     @GetMapping("/company/manager")
-    public List<Employee>
-     findCompanyManager() {
-        return employeeService.findCompanyManager();
+    public List<Object[]>
+    findEmployeesWithoutManager() {
+        return employeeService.findEmployeesWithoutManager();
     }   
 
     //PERFECT
@@ -56,20 +56,20 @@ public class EmployeeController {
         return employeeService.findEmployeesWithManagersAndManagerOfManagers();
     }
 
-    //PERFECT
+    //ERROR
     @GetMapping("/without-office")
     public List<Employee> findEmployeesWithoutOffice() {
         return employeeService.findEmployeesWithoutOffice();
     }
     
 
-    //PERFECT
+     //PERFECT
     @GetMapping("/without-client")
     public List<Object[]> findEmployeesWithoutClient() {
         return employeeService.findEmployeesWithoutClient();
     }
 
-    //PERFECT
+    //ERROR
     @GetMapping("/without-client-and-office")
     public List<Object[]> findEmployeesWithoutClientAndTheirOffice() {
         return employeeService.findEmployeesWithoutClientAndTheirOffice();

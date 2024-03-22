@@ -16,8 +16,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
  
  
       // 2. Returns the name of the position, first name, last name and email of the company manager.
-      @Query("SELECT e FROM Employee e WHERE e.manager IS NULL")
-      List<Employee> findCompanyManager();
+      @Query("SELECT e.position AS position, j.firstName, j.lastName1, j.lastName2, j.email " +
+            "FROM Employee j " +
+            "LEFT JOIN j.manager e " +
+            "WHERE e IS NULL")
+      List<Object[]> findEmployeesWithoutManager();
  
       // 3. Returns a list with the first name, last name and position of those employees who are not sales representatives.
       @Query("SELECT e.firstName, e.lastName1, e.lastName2, e.position FROM Employee e WHERE e.position IS NOT NULL AND e.position <> :position")
