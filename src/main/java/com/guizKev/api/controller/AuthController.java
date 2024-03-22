@@ -7,6 +7,7 @@ import com.guizKev.api.domain.service.auth.AuthServiceImpl;
 import com.guizKev.api.util.auth.AuthResponse;
 import com.guizKev.api.util.login.BodyRequest;
 
+import org.springframework.http.MediaType;
 
 import lombok.*;
 
@@ -25,7 +26,7 @@ public class AuthController {
     private  AuthServiceImpl authService;
 
     
-     @PostMapping(value = "/login")
+    @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
      public ResponseEntity<AuthResponse> login(@RequestBody BodyRequest bodyRequest) {
          return ResponseEntity.ok(authService.login(bodyRequest)); 
      }
