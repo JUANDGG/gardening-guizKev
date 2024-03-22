@@ -1,20 +1,35 @@
 # **Api Gardening GuizKev 👀**
 
-## what does it consist of ? :
+## What does it consist of ? :
 The project is to develop a dedicated api to support the operations of a company in the gardening industry. This software will cover several areas, including office and employee details, customer management, orders, products and payments.
 
 ## Main objective
 The main objective of the project is to develop software dedicated to backing up the operations of a company in the gardening sector.
 
 ## Technologies Used
-The project will utilize the following technologies:
+The project will utilize the following technologies in Backend:
 - Java 
 - Spring Boot framework
 - MySQL  database
+- Spring Data JPA
+- Cors
+- JWT
+- Swagger
+
+The project will utilize the following technologies in Front-end:
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Tabulator
 
 
 ## Database Design
 ![Database Design](/imagesDocumentation/physical_database_model.png)
+
+## Folder organization
+
+![Folder Organization](/imagesDocumentation/FolderOrganization.png)
 
 ## Queries in MySQL for specify table
 
@@ -1271,14 +1286,31 @@ The project will utilize the following technologies:
 </details>
 
 ## Class Diagram
+![Image Class Diagram](/imagesDocumentation/ClassDiagram.png)
 [Link Class Diagram](https://drive.google.com/file/d/1BhnQA5zl94FS9KlvVA2zUUOgZXkZM_Uv/view?usp=sharing)
 
 
 
-## Security
-![Create the Web Token](/imagesDocumentation/PostUserPassWebToken.png)
+## Front-End 
 
-![Get Data with Web Token](/imagesDocumentation/GetWithWebToken.png)
+- Sign in and Sign Up
+
+![Image Class Diagram](/imagesDocumentation/SingIn.png)
+
+![Image Class Diagram](/imagesDocumentation/SignUp.png)
+
+- DashBoard
+
+![Image Class Diagram](/imagesDocumentation/DashBoard.png)
+
+## Dashboard
+
+- If you want to watch our page, in that Url:
+
+   ```
+   https://front-endapiguizkev-production.up.railway.app/
+   ```
+
 
 ## Features
 The software will include the following features:
