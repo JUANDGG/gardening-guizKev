@@ -1,0 +1,22 @@
+.body {
+    position: relative;
+}
+
+.body::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5); /* Color negro semi-transparente */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Para colocarlo detrás del contenido principal */
+}
+
+
+.body {
+    background-image: url(../assets/img/login.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

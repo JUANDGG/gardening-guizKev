@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Gardening guizKev</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="./css/dashBoard.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.0.1/css/tabulator_bootstrap3.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.0.1/js/tabulator.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand ps-3" href="index.html">Gardening guizKev</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+           
+        </form>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li id="btn_logout"><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseClient" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Client
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseClient" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown client ">
+                                <li class="query " data-endpoint="client/names/spain"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="client/codes/payments/2009"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="client/employee-city-code"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="client/sales-representatives"><a href="#">query 4</a></li>
+                                <li class="query" data-endpoint="client/payments-sales-representatives"><a href="#">query 5</a></li>
+                                <li class="query" data-endpoint="client/no-payments-sales-representatives"><a href="#">query 6</a></li>
+                                <li class="query" data-endpoint="client/payments-representative-office-city"><a href="#">query 7</a></li>
+                                <li class="query" data-endpoint="client/no-payments-representative-office-city"><a href="#">query 8</a></li>
+                                <li class="query" data-endpoint="client/late-orders"><a href="#">query 9</a></li>
+                                <li class="query" data-endpoint="client/purchased-product-ranges"><a href="#">query 10</a></li>
+                                <li class="query" data-endpoint="client/no-payments"><a href="#">query 11</a></li>
+                                <li class="query" data-endpoint="client/no-orders"><a href="#">query 12</a></li>
+                                <li class="query" data-endpoint="client/no-payments-no-orders"><a href="#">query 13</a></li>
+                                <li class="query" data-endpoint="client/orders-no-payments"><a href="#">query 14</a></li>
+                                <li class="query" data-endpoint="client/count-by-country"><a href="#">query 15</a></li>
+                                <li class="query" data-endpoint="client/count"><a href="#">query 16</a></li>
+                                <li class="query" data-endpoint="client/count-in-city/madrid"><a href="#">query 17</a></li>
+                                <li class="query" data-endpoint="client/count-by-city-starting-with/m"><a href="#">query 18</a></li>
+                                <li class="query" data-endpoint="client/count-without-sales-representative"><a href="#">query 19</a></li>
+                                <li class="query" data-endpoint="client/first-and-last-payment-dates"><a href="#">query 20</a></li>
+                                <li class="query" data-endpoint="client/clients-sales-representatives-office-city"><a href="#">query 21</a></li>
+                            </ul>
+                        </div>
+                        
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseEmployee" aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Employee
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseEmployee" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="employee/managers/7"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="employee/company/manager"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="employee/non-sales-representatives?position=Representante Ventas"><a href="#">query 3 </a></li>
+                                <li class="query" data-endpoint="employee/with-managers"><a href="#">query 4</a></li>
+                                <li class="query" data-endpoint="employee/with-managers-and-manager-of-managers"><a href="#">query 5</a></li>
+                                <li class="query" data-endpoint="employee/without-office"><a href="#">query6</a></li>
+                                <li class="query" data-endpoint="employee/without-client"><a href="#">query 7</a></li>
+                                <li class="query" data-endpoint="employee/without-client-and-office"><a href="#">query 8</a></li>
+                                <li class="query" data-endpoint="employee/without-office-and-client"><a href="#">query 9</a></li>
+                                <li class="query" data-endpoint="employee/without-client-and-manager"><a href="#">query 10</a></li>
+                                <li class="query" data-endpoint="employee/count"><a href="#">query 11</a></li>
+                                <li class="query" data-endpoint="employee/sales-representatives"><a href="#">query 12</a></li>
+                            </ul>
+                        </div>
+
+
+                             
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrder" aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Order
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOrder" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="order/distinct-states"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="order/not-delivered-on-time"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="order/delivered-days-before-expected/-2"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="order/rejected-in-year/2009"><a href="#">query 4</a></li>
+                                <li class="query" data-endpoint="order/delivered-in-month/1"><a href="#">query 5</a></li>
+                                <li class="query" data-endpoint="order/count-by-state"><a href="#">query 6</a></li>
+                            </ul>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseOrderDetail"  aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Order Detail
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOrderDetail" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="orderDetail/distinct-products"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="orderDetail/total-quantity"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="orderDetail/billing"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="orderDetail/billing-by-product"><a href="#">query 4</a></li>
+                                <li class="query" data-endpoint="orderDetail/billing-by-product-starting-with"><a href="#">query 5</a></li>
+                                <li class="query" data-endpoint="orderDetail/total-sales-over-3000-euros"><a href="#">query 6</a></li>
+                            </ul>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProduct"  aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Product
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseProduct" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="product/byRangeAndStock?range=o    rnamentales&quantity=100"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="product/notInOrders"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="product/notInOrdersWithDetails"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="product/maxAndMinSalesPrice"><a href="#">query 4</a></li>
+                                <li class="query" data-endpoint="product/topByUnitsSold"><a href="#">query 5</a></li>
+                            </ul>
+                            
+                        </div>
+                        
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseOffice" aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Office
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOffice" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="office/codes"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="office/cities/españa"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="office/addresses/fuenlabrada"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="office/withoutReps/Frutales"><a href="#">query 4</a></li>
+                            </ul>
+                        </div>
+
+                         
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePagesEmployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Payment
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePayment" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <ul class="side-dropdown">
+                                <li class="query" data-endpoint="payment/year/2008/paymentForm/paypal"><a href="#">query 1</a></li>
+                                <li class="query" data-endpoint="payment/forms"><a href="#">query 2</a></li>
+                                <li class="query" data-endpoint="payment/average/2009"><a href="#">query 3</a></li>
+                                <li class="query" data-endpoint="payment/totalperyear"><a href="#">query 4</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4" id="container">
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="./js/queryTables/funcionalityClickQuery.js" type="module"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="./js/auth/logout.js" type="module"></script>
+    
+</body>
+</html>
