@@ -4,7 +4,8 @@
 
 
 ## What does it consist of ? :
-El proyecto consiste en desarrollar una aplicacion dedicada a apoyar las operaciones de una empresa del sector de la jardinería. 
+The project consists of developing an application dedicated to support the operations of a company in the gardening sector. 
+
 
 ## Main objective
 The main objective of the project is to develop software dedicated to backing up the operations of a company in the gardening sector.
