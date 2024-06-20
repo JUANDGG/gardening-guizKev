@@ -1,0 +1,5 @@
+# Usa una imagen oficial de OpenJDK como base
+FROM openjdk:17-jdk-slim
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT [ "java","jar","/app.jar" ]

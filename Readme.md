@@ -30,15 +30,15 @@ The project will utilize the following technologies in **_Front-end_**:
 
 
 <details>
-<summary>Back-end documentation</summary>
+<summary>Back-end util</summary>
 
     
    ## Database Design
-   ![Database Design](./documentation/img-backEnd/physical_database_model.png)
+   ![Database Design](./util/img-backEnd/physical_database_model.png)
 
    ## Folder organization
 
-   ![Folder Organization](./documentation/img-backEnd/FolderOrganization.png)
+   ![Folder Organization](./util/img-backEnd/FolderOrganization.png)
 
    ## Queries in MySQL for specify table
 
@@ -1296,22 +1296,22 @@ The project will utilize the following technologies in **_Front-end_**:
    </details>
 
    ## Class Diagram
-   ![Image Class Diagram](./documentation/img-backEnd/ClassDiagram.png)
+   ![Image Class Diagram](./util/img-backEnd/ClassDiagram.png)
    [Link Class Diagram](https://drive.google.com/file/d/1BhnQA5zl94FS9KlvVA2zUUOgZXkZM_Uv/view?usp=sharing)
 </details>
 
 
 <details>
-<summary>Front-end documentation</summary>
+<summary>Front-end util</summary>
 - Sign in and Sign Up
 
-![Image Class Diagram](./documentation/img-frontEnd/SingIn.png)
+![Image Class Diagram](./util/img-frontEnd/SingIn.png)
 
-![Image Class Diagram](./documentation/img-frontEnd/SignUp.png)
+![Image Class Diagram](./util/img-frontEnd/SignUp.png)
 
 - DashBoard
 
-![Image Class Diagram](./documentation/img-frontEnd/DashBoard.png)
+![Image Class Diagram](./util/img-frontEnd/DashBoard.png)
 
 </details>
 
@@ -1324,7 +1324,7 @@ The project will adhere to the following development practices:
 - Use of version control (e.g., Git) for code management
 - Implementation of unit tests for ensuring code quality
 - Adoption of coding standards and best practices
-- Documentation of code and project structure
+- util of code and project structure
 - Continuous integration and deployment for automated builds and deployments
 
 
